@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Briefcase, Calendar, MapPin, Award, GraduationCap } from 'lucide-react';
+import { ExperienceBackground } from './SectionBackgrounds';
 
 const experiences = [
   {
@@ -60,7 +61,7 @@ const ExperienceCard = ({ experience, index }) => {
 
       {/* Card Content */}
       <motion.div
-        className="p-4 sm:p-6 bg-slate-800/30 rounded-xl border border-slate-700/50 hover:border-blue-500/30 transition-colors ml-4"
+        className="p-4 sm:p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-blue-500/30 transition-colors ml-4"
         whileHover={{ x: 5 }}
       >
         <div className="flex flex-col sm:flex-row sm:flex-wrap items-start justify-between gap-2 sm:gap-4 mb-3 sm:mb-4">
@@ -116,12 +117,13 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-20 md:py-32 relative">
+      <ExperienceBackground />
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/3 right-0 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -159,7 +161,7 @@ const Experience = () => {
           {education.map((edu, index) => (
             <motion.div
               key={edu.institution}
-              className="p-4 sm:p-6 bg-slate-800/30 rounded-xl border border-slate-700/50 hover:border-blue-500/30 transition-colors"
+              className="p-4 sm:p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-blue-500/30 transition-colors"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 1 + index * 0.1 }}
@@ -205,7 +207,7 @@ const Experience = () => {
             {certifications.map((cert, index) => (
               <motion.div
                 key={index}
-                className="p-3 sm:p-4 bg-slate-800/30 rounded-xl border border-slate-700/50 hover:border-blue-500/30 transition-colors"
+                className="p-3 sm:p-4 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-blue-500/30 transition-colors"
                 initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ delay: 1.4 + index * 0.1 }}

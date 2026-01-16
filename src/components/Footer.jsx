@@ -18,10 +18,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative py-8 sm:py-12 border-t border-slate-800">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-slate-900 to-slate-950" />
-
+    <footer className="relative py-8 sm:py-12 border-t border-white/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center">
           {/* Logo */}
@@ -48,7 +45,7 @@ const Footer = () => {
           </nav>
 
           {/* Divider */}
-          <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-slate-700 to-transparent mb-6 sm:mb-8" />
+          <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-6 sm:mb-8" />
 
           {/* Copyright */}
           <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-slate-500 text-xs sm:text-sm text-center">
@@ -64,10 +61,10 @@ const Footer = () => {
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 p-2.5 sm:p-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full shadow-lg transition-colors z-50"
+        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 p-2.5 sm:p-3 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-blue-500/50 hover:border-blue-500/50 text-white rounded-full shadow-lg transition-all z-50"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        whileHover={{ scale: 1.1 }}
+        whileHover={{ scale: 1.1, y: -3 }}
         whileTap={{ scale: 0.9 }}
         aria-label="Scroll to top"
       >

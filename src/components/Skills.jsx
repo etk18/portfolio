@@ -1,5 +1,6 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
+import { SkillsBackground } from './SectionBackgrounds';
 
 const skillCategories = [
   {
@@ -47,9 +48,9 @@ const SkillBar = ({ name, level, delay }) => {
         <span className="text-slate-300 font-medium text-sm sm:text-base">{name}</span>
         <span className="text-blue-400 text-sm">{level}%</span>
       </div>
-      <div className="h-1.5 sm:h-2 bg-slate-800 rounded-full overflow-hidden">
+      <div className="h-1.5 sm:h-2 bg-white/10 backdrop-blur-sm rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg shadow-blue-500/30"
           initial={{ width: 0 }}
           animate={isInView ? { width: `${level}%` } : { width: 0 }}
           transition={{ duration: 1, delay: delay, ease: 'easeOut' }}
@@ -72,12 +73,8 @@ const Skills = () => {
 
   return (
     <section id="skills" className="py-20 md:py-32 relative">
-      {/* Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <SkillsBackground />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -104,11 +101,11 @@ const Skills = () => {
           {technologies.map((tech, index) => (
             <motion.span
               key={tech}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-slate-800/50 border border-slate-700/50 rounded-full text-xs sm:text-sm text-slate-300 hover:border-blue-500/50 hover:text-blue-400 transition-colors cursor-default"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-xs sm:text-sm text-slate-300 hover:border-blue-500/50 hover:text-blue-400 transition-all cursor-default shadow-lg"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.3 + index * 0.05 }}
-              whileHover={{ scale: 1.05, y: -2 }}
+              whileHover={{ scale: 1.1, y: -3 }}
             >
               {tech}
             </motion.span>
@@ -120,10 +117,12 @@ const Skills = () => {
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
-              className="p-4 sm:p-6 bg-slate-800/30 rounded-xl sm:rounded-2xl border border-slate-700/50 hover:border-blue-500/30 transition-colors"
+              className="p-4 sm:p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-xl"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4 + categoryIndex * 0.2 }}
+              whileHover={{ y: -5, scale: 1.02 }}
+              style={{ transformStyle: 'preserve-3d' }}
             >
               <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 flex items-center gap-2">
                 <span className="w-2 h-2 bg-blue-500 rounded-full" />

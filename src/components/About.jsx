@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Calendar, MapPin, Briefcase, Download, User } from 'lucide-react';
+import { AboutBackground } from './SectionBackgrounds';
 
 const About = () => {
   const ref = useRef(null);
@@ -16,12 +17,8 @@ const About = () => {
 
   return (
     <section id="about" className="py-20 md:py-32 relative">
-      {/* Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/2 left-0 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <AboutBackground />
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"
@@ -49,7 +46,7 @@ const About = () => {
             <div className="relative aspect-square max-w-xs sm:max-w-sm md:max-w-md mx-auto">
               {/* Decorative Elements */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl transform rotate-3" />
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 overflow-hidden">
+              <div className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
                 {/* Profile Image */}
                 <img 
                   src="/profile.jpg" 
@@ -60,7 +57,7 @@ const About = () => {
 
               {/* Floating Cards - Hidden on mobile */}
               <motion.div
-                className="hidden sm:block absolute -top-4 -right-4 bg-slate-800 border border-slate-700 rounded-xl p-3 sm:p-4 shadow-xl z-10"
+                className="hidden sm:block absolute -top-4 -right-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 sm:p-4 shadow-xl z-10"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
@@ -70,7 +67,7 @@ const About = () => {
               </motion.div>
 
               <motion.div
-                className="hidden sm:block absolute -bottom-4 -left-4 bg-slate-800 border border-slate-700 rounded-xl p-3 sm:p-4 shadow-xl z-10"
+                className="hidden sm:block absolute -bottom-4 -left-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 sm:p-4 shadow-xl z-10"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
@@ -90,16 +87,11 @@ const About = () => {
             <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
               AI/ML Developer Based in Delhi, India
             </h3>
-            <p className="text-slate-400 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              I'm an AI/ML Developer with hands-on experience building neural networks and 
-              deep learning models for predictive analytics. Proficient in Python, TensorFlow, 
-              scikit-learn, and NLP techniques with a strong foundation in full-stack development 
-              using React.js, Node.js, and modern web technologies.
+            <p className="text-slate-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base font-medium">
+              I'm an AI/ML Developer with hands-on experience building neural networks and deep learning models for predictive analytics. Proficient in Python, TensorFlow, scikit-learn, and NLP techniques with a strong foundation in full-stack development using React.js, Node.js, and modern web technologies.
             </p>
-            <p className="text-slate-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-              Currently pursuing B.Tech in Information Technology at Maharaja Agrasen Institute 
-              of Technology with a GPA of 8.5/10. I'm passionate about leveraging machine learning 
-              to solve complex real-world problems and drive data-driven decision making.
+            <p className="text-slate-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base font-medium">
+              Currently pursuing B.Tech in Information Technology at Maharaja Agrasen Institute of Technology with a GPA of 8.5/10. I'm passionate about leveraging machine learning to solve complex real-world problems and drive data-driven decision making.
             </p>
 
             {/* Info Cards */}
@@ -112,10 +104,12 @@ const About = () => {
               ].map((item, index) => (
                 <motion.div
                   key={item.label}
-                  className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-800/50 rounded-lg border border-slate-700/50"
+                  className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.6 + index * 0.1 }}
+                  whileHover={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
+                  style={{ transformStyle: 'preserve-3d' }}
                 >
                   <item.icon className="text-blue-400 shrink-0" size={18} />
                   <div className="min-w-0">
@@ -129,8 +123,8 @@ const About = () => {
             <motion.a
               href="/resume.pdf"
               download="Eesh_Sagar_Singh_Resume.pdf"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors"
-              whileHover={{ scale: 1.05 }}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25"
+              whileHover={{ scale: 1.05, y: -3 }}
               whileTap={{ scale: 0.95 }}
             >
               <Download size={18} />
@@ -149,8 +143,9 @@ const About = () => {
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
-              className="text-center p-4 sm:p-6 bg-slate-800/30 rounded-xl border border-slate-700/50"
-              whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.5)' }}
+              className="text-center p-4 sm:p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-lg"
+              whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
+              style={{ transformStyle: 'preserve-3d' }}
             >
               <motion.span
                 className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"

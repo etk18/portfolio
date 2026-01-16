@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { HeroBackground } from './SectionBackgrounds';
 
 const Hero = () => {
   const containerVariants = {
@@ -22,67 +23,71 @@ const Hero = () => {
     },
   };
 
+  const letterVariants = {
+    hidden: { opacity: 0, y: 50, rotateX: -90 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      rotateX: 0,
+      transition: { duration: 0.5, ease: 'easeOut' },
+    },
+  };
+
+  const name = "Eesh Sagar Singh";
+
   return (
     <section
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
-      {/* Animated Background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950" />
-        <motion.div
-          className="absolute top-1/4 left-1/4 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-blue-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 right-1/4 w-48 sm:w-72 md:w-96 h-48 sm:h-72 md:h-96 bg-purple-500/10 rounded-full blur-3xl"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        {/* Grid Pattern */}
-        <div
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px',
-          }}
-        />
-      </div>
+      <HeroBackground />
 
       <motion.div
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.div variants={itemVariants} className="mb-6">
-          <span className="inline-block px-4 py-2 text-sm font-medium text-blue-400 bg-blue-500/10 rounded-full border border-blue-500/20">
+          <span className="inline-block px-4 py-2 text-sm font-medium text-blue-400 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-lg shadow-blue-500/10">
             Welcome to my portfolio
           </span>
         </motion.div>
 
         <motion.h1
-          variants={itemVariants}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-8"
         >
-          <span className="block text-white mb-2">Hi, I'm</span>
-          <span className="block bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent pb-2">
-            Eesh Sagar Singh
+          <motion.span 
+            className="block bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-3"
+            variants={itemVariants}
+          >
+            Hi, I'm
+          </motion.span>
+          <span className="block pb-2 bg-slate-900/10 backdrop-blur-[1px] px-6 py-3 rounded-[2rem] inline-block" style={{ perspective: '1200px' }}>
+            {name.split('').map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0, rotateY: 90, rotateX: -45, z: -200 }}
+                animate={{ opacity: 1, rotateY: 0, rotateX: 0, z: 0 }}
+                transition={{
+                  delay: 0.8 + index * 0.1,
+                  duration: 0.6,
+                  ease: [0.43, 0.13, 0.23, 0.96]
+                }}
+                className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
+                style={{
+                  display: 'inline-block',
+                  transformStyle: 'preserve-3d',
+                  transformOrigin: 'center center',
+                  backfaceVisibility: 'hidden',
+                  WebkitBackfaceVisibility: 'hidden',
+                  overflow: 'visible',
+                  lineHeight: '1.2'
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </motion.span>
+            ))}
           </span>
         </motion.h1>
 
@@ -102,17 +107,19 @@ const Hero = () => {
         >
           <motion.a
             href="#projects"
-            className="px-6 sm:px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors text-center"
-            whileHover={{ scale: 1.05, y: -2 }}
+            className="px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium rounded-xl transition-all text-center shadow-lg shadow-blue-500/25 backdrop-blur-sm"
+            whileHover={{ scale: 1.05, y: -3, rotateX: 5 }}
             whileTap={{ scale: 0.95 }}
+            style={{ transformStyle: 'preserve-3d' }}
           >
             View My Work
           </motion.a>
           <motion.a
             href="#contact"
-            className="px-6 sm:px-8 py-3 border border-slate-700 hover:border-blue-500 text-slate-300 hover:text-white font-medium rounded-lg transition-colors text-center"
-            whileHover={{ scale: 1.05, y: -2 }}
+            className="px-6 sm:px-8 py-3 bg-white/5 backdrop-blur-md border border-white/10 hover:border-blue-500/50 text-slate-300 hover:text-white font-medium rounded-xl transition-all text-center shadow-lg"
+            whileHover={{ scale: 1.05, y: -3, rotateX: 5 }}
             whileTap={{ scale: 0.95 }}
+            style={{ transformStyle: 'preserve-3d' }}
           >
             Get In Touch
           </motion.a>
@@ -133,9 +140,10 @@ const Hero = () => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-slate-400 hover:text-blue-400 bg-slate-800/50 hover:bg-slate-800 rounded-lg transition-colors"
-              whileHover={{ scale: 1.1, y: -2 }}
+              className="p-3 text-slate-400 hover:text-blue-400 bg-white/5 backdrop-blur-md border border-white/10 hover:border-blue-500/50 rounded-xl transition-all shadow-lg"
+              whileHover={{ scale: 1.15, y: -3, rotateY: 10 }}
               whileTap={{ scale: 0.9 }}
+              style={{ transformStyle: 'preserve-3d' }}
               aria-label={social.label}
             >
               <social.icon size={20} />

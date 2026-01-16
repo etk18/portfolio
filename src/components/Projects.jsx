@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef, useState } from 'react';
 import { ExternalLink, Github, Folder } from 'lucide-react';
+import { ProjectsBackground } from './SectionBackgrounds';
 
 const projects = [
   {
@@ -86,7 +87,7 @@ const ProjectCard = ({ project, index, isFeatured }) => {
           whileHover={{ scale: 1.02 }}
         >
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl transform rotate-2 group-hover:rotate-3 transition-transform" />
-          <div className="relative aspect-video bg-slate-800 rounded-xl overflow-hidden border border-slate-700/50">
+          <div className="relative aspect-video bg-slate-800 rounded-xl overflow-hidden border border-white/10">
             {/* Placeholder - replace with actual image */}
             <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-800 to-slate-900">
               <Folder className="text-slate-600" size={48} />
@@ -100,7 +101,7 @@ const ProjectCard = ({ project, index, isFeatured }) => {
         <div className={index % 2 === 1 ? 'md:order-1 md:text-right' : ''}>
           <span className="text-blue-400 text-xs sm:text-sm font-medium">Featured Project</span>
           <h3 className="text-xl sm:text-2xl font-bold text-white mt-2 mb-3 sm:mb-4">{project.title}</h3>
-          <div className="p-4 sm:p-6 bg-slate-800/50 rounded-xl border border-slate-700/50 mb-3 sm:mb-4">
+          <div className="p-4 sm:p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/10 mb-3 sm:mb-4">
             <p className="text-slate-400 text-sm sm:text-base">{project.description}</p>
           </div>
           <div className={`flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4 ${index % 2 === 1 ? 'md:justify-end' : ''}`}>
@@ -144,7 +145,7 @@ const ProjectCard = ({ project, index, isFeatured }) => {
   return (
     <motion.div
       ref={ref}
-      className="group p-4 sm:p-6 bg-slate-800/30 rounded-xl border border-slate-700/50 hover:border-blue-500/30 transition-all"
+      className="group p-4 sm:p-6 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 hover:border-blue-500/30 transition-all"
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.5, delay: index * 0.1 }}
@@ -198,12 +199,13 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 md:py-32 relative">
+      <ProjectsBackground />
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div
           className="text-center mb-16"

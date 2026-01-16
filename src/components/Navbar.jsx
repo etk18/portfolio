@@ -30,7 +30,7 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-slate-900/80 backdrop-blur-lg border-b border-slate-800'
+          ? 'bg-white/5 backdrop-blur-xl border-b border-white/10 shadow-lg'
           : 'bg-transparent'
       }`}
     >
@@ -52,7 +52,7 @@ const Navbar = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded-lg hover:bg-slate-800/50 transition-colors"
+                className="px-4 py-2 text-sm font-medium text-slate-300 hover:text-white rounded-xl hover:bg-white/10 transition-all"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -64,8 +64,8 @@ const Navbar = () => {
             <motion.a
               href="/resume.pdf"
               download="Eesh_Sagar_Singh_Resume.pdf"
-              className="ml-4 px-5 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
-              whileHover={{ scale: 1.05 }}
+              className="ml-4 px-5 py-2 text-sm font-medium bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white rounded-xl transition-all shadow-lg shadow-blue-500/25"
+              whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
               Resume
@@ -90,14 +90,14 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-slate-900/95 backdrop-blur-lg border-b border-slate-800"
+            className="md:hidden bg-white/5 backdrop-blur-xl border-b border-white/10"
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-slate-800/50 rounded-lg transition-colors"
+                  className="block px-4 py-3 text-slate-300 hover:text-white hover:bg-white/10 rounded-xl transition-all"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
@@ -109,7 +109,7 @@ const Navbar = () => {
               <motion.a
                 href="/resume.pdf"
                 download="Eesh_Sagar_Singh_Resume.pdf"
-                className="block px-4 py-3 text-center bg-blue-600 hover:bg-blue-500 text-white rounded-lg transition-colors"
+                className="block px-4 py-3 text-center bg-gradient-to-r from-blue-600 to-blue-500 text-white rounded-xl transition-all shadow-lg"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: navLinks.length * 0.05 }}

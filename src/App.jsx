@@ -6,12 +6,14 @@ import Projects from './components/Projects';
 import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Background3D from './components/Background3D';
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-950 overflow-x-hidden">
+    <div className="min-h-screen overflow-x-hidden relative">
+      <Background3D />
       <Navbar />
-      <main className="overflow-x-hidden">
+      <main className="overflow-x-hidden relative z-10">
         <Hero />
         <About />
         <Skills />
