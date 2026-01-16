@@ -1,0 +1,172 @@
+import { motion } from 'framer-motion';
+import { useInView } from 'framer-motion';
+import { useRef } from 'react';
+import { Calendar, MapPin, Briefcase, Download, User } from 'lucide-react';
+
+const About = () => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  const stats = [
+    { label: 'GPA Score', value: '8.5' },
+    { label: 'Projects Completed', value: '5+' },
+    { label: 'Technologies', value: '20+' },
+    { label: 'Certifications', value: '5+' },
+  ];
+
+  return (
+    <section id="about" className="py-20 md:py-32 relative">
+      {/* Background Elements */}
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-1/2 left-0 w-72 h-72 bg-blue-500/5 rounded-full blur-3xl" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+        {/* Section Header */}
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="text-blue-400 font-medium text-sm tracking-wider uppercase">
+            About Me
+          </span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-white">
+            Get To Know Me
+          </h2>
+          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full" />
+        </motion.div>
+
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* Image/Visual Side */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: -50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <div className="relative aspect-square max-w-xs sm:max-w-sm md:max-w-md mx-auto">
+              {/* Decorative Elements */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl transform rotate-3" />
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700/50 overflow-hidden">
+                {/* Profile Image */}
+                <img 
+                  src="/profile.jpg" 
+                  alt="Eesh Sagar Singh"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Floating Cards - Hidden on mobile */}
+              <motion.div
+                className="hidden sm:block absolute -top-4 -right-4 bg-slate-800 border border-slate-700 rounded-xl p-3 sm:p-4 shadow-xl z-10"
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <Briefcase className="text-blue-400 mb-1" size={20} />
+                <p className="text-white font-semibold text-sm">AI/ML</p>
+                <p className="text-slate-400 text-xs">Developer</p>
+              </motion.div>
+
+              <motion.div
+                className="hidden sm:block absolute -bottom-4 -left-4 bg-slate-800 border border-slate-700 rounded-xl p-3 sm:p-4 shadow-xl z-10"
+                animate={{ y: [0, 10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+              >
+                <Calendar className="text-purple-400 mb-1" size={20} />
+                <p className="text-white font-semibold text-sm">B.Tech IT</p>
+                <p className="text-slate-400 text-xs">2023-2027</p>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Content Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
+              AI/ML Developer Based in Delhi, India
+            </h3>
+            <p className="text-slate-400 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
+              I'm an AI/ML Developer with hands-on experience building neural networks and 
+              deep learning models for predictive analytics. Proficient in Python, TensorFlow, 
+              scikit-learn, and NLP techniques with a strong foundation in full-stack development 
+              using React.js, Node.js, and modern web technologies.
+            </p>
+            <p className="text-slate-400 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
+              Currently pursuing B.Tech in Information Technology at Maharaja Agrasen Institute 
+              of Technology with a GPA of 8.5/10. I'm passionate about leveraging machine learning 
+              to solve complex real-world problems and drive data-driven decision making.
+            </p>
+
+            {/* Info Cards */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-6 sm:mb-8">
+              {[
+                { icon: User, label: 'Name', value: 'Eesh Sagar Singh' },
+                { icon: MapPin, label: 'Location', value: 'Delhi, India' },
+                { icon: Calendar, label: 'Education', value: 'B.Tech IT' },
+                { icon: Briefcase, label: 'Status', value: 'Open to Work' },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.label}
+                  className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-slate-800/50 rounded-lg border border-slate-700/50"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.6 + index * 0.1 }}
+                >
+                  <item.icon className="text-blue-400 shrink-0" size={18} />
+                  <div className="min-w-0">
+                    <p className="text-slate-500 text-xs">{item.label}</p>
+                    <p className="text-white text-xs sm:text-sm font-medium truncate">{item.value}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <motion.a
+              href="/resume.pdf"
+              download="Eesh_Sagar_Singh_Resume.pdf"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-medium rounded-lg transition-colors"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Download size={18} />
+              Download Resume
+            </motion.a>
+          </motion.div>
+        </div>
+
+        {/* Stats */}
+        <motion.div
+          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-12 sm:mt-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.8 }}
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              className="text-center p-4 sm:p-6 bg-slate-800/30 rounded-xl border border-slate-700/50"
+              whileHover={{ y: -5, borderColor: 'rgba(59, 130, 246, 0.5)' }}
+            >
+              <motion.span
+                className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                transition={{ delay: 1 + index * 0.1 }}
+              >
+                {stat.value}
+              </motion.span>
+              <p className="text-slate-400 mt-1 sm:mt-2 text-xs sm:text-sm">{stat.label}</p>
+            </motion.div>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
