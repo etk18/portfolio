@@ -1,6 +1,7 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { SkillsBackground } from './SectionBackgrounds';
+import { GlassCard } from '../hooks/useGlassTilt';
 
 const skillCategories = [
   {
@@ -45,12 +46,12 @@ const SkillBar = ({ name, level, delay }) => {
   return (
     <div ref={ref} className="mb-3 sm:mb-4">
       <div className="flex justify-between mb-1.5 sm:mb-2">
-        <span className="text-slate-300 font-medium text-sm sm:text-base">{name}</span>
-        <span className="text-blue-400 text-sm">{level}%</span>
+        <span className="text-[var(--text-secondary)] font-medium text-sm sm:text-base">{name}</span>
+        <span className="text-emerald-400 text-sm">{level}%</span>
       </div>
-      <div className="h-1.5 sm:h-2 bg-white/10 backdrop-blur-sm rounded-full overflow-hidden">
+      <div className="h-1.5 sm:h-2 bg-[var(--bg-tertiary)] rounded-full overflow-hidden">
         <motion.div
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full shadow-lg shadow-blue-500/30"
+          className="h-full bg-gradient-to-r from-emerald-500 to-amber-500 rounded-full"
           initial={{ width: 0 }}
           animate={isInView ? { width: `${level}%` } : { width: 0 }}
           transition={{ duration: 1, delay: delay, ease: 'easeOut' }}
@@ -82,13 +83,13 @@ const Skills = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-blue-400 font-medium text-sm tracking-wider uppercase">
+          <span className="text-emerald-400 font-medium text-sm tracking-wider uppercase">
             My Skills
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-white">
+          <h2 className="section-heading text-[var(--text-primary)] mt-2">
             Technical Expertise
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full" />
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto mt-4 rounded-full" />
         </motion.div>
 
         {/* Floating Tech Tags */}
@@ -101,10 +102,10 @@ const Skills = () => {
           {technologies.map((tech, index) => (
             <motion.span
               key={tech}
-              className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/5 backdrop-blur-md border border-white/10 rounded-full text-xs sm:text-sm text-slate-300 hover:border-blue-500/50 hover:text-blue-400 transition-all cursor-default shadow-lg"
+              className="px-3 sm:px-4 py-1.5 sm:py-2 glass-card text-xs sm:text-sm text-[var(--text-secondary)] hover:text-emerald-400 hover:border-emerald-500/50 transition-all cursor-default"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.3 + index * 0.05 }}
+              transition={{ delay: 0.3 + index * 0.03 }}
               whileHover={{ scale: 1.1, y: -3 }}
             >
               {tech}
@@ -115,17 +116,13 @@ const Skills = () => {
         {/* Skill Categories */}
         <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {skillCategories.map((category, categoryIndex) => (
-            <motion.div
+            <GlassCard
               key={category.title}
-              className="p-4 sm:p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 hover:border-blue-500/30 transition-all shadow-xl"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.4 + categoryIndex * 0.2 }}
-              whileHover={{ y: -5, scale: 1.02 }}
-              style={{ transformStyle: 'preserve-3d' }}
+              className="p-4 sm:p-6"
+              maxTilt={6}
             >
-              <h3 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6 flex items-center gap-2">
-                <span className="w-2 h-2 bg-blue-500 rounded-full" />
+              <h3 className="text-lg sm:text-xl font-bold text-[var(--text-primary)] mb-4 sm:mb-6 flex items-center gap-2">
+                <span className="w-2 h-2 bg-emerald-500 rounded-full" />
                 {category.title}
               </h3>
               {category.skills.map((skill, skillIndex) => (
@@ -136,7 +133,7 @@ const Skills = () => {
                   delay={0.6 + categoryIndex * 0.2 + skillIndex * 0.1}
                 />
               ))}
-            </motion.div>
+            </GlassCard>
           ))}
         </div>
 
@@ -147,11 +144,11 @@ const Skills = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.2 }}
         >
-          <p className="text-slate-400 max-w-2xl mx-auto">
+          <p className="text-[var(--text-muted)] max-w-2xl mx-auto">
             I'm constantly learning and exploring new technologies. Currently diving deeper into{' '}
-            <span className="text-blue-400">Generative AI</span>,{' '}
-            <span className="text-blue-400">LangChain</span>, and{' '}
-            <span className="text-blue-400">Computer Vision with PyTorch</span>.
+            <span className="text-emerald-400">Generative AI</span>,{' '}
+            <span className="text-emerald-400">LangChain</span>, and{' '}
+            <span className="text-amber-400">Computer Vision with PyTorch</span>.
           </p>
         </motion.div>
       </div>

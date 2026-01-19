@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import { HeroBackground } from './SectionBackgrounds';
+import { GlassButton } from '../hooks/useGlassTilt';
 
 const Hero = () => {
   const containerVariants = {
@@ -23,16 +24,6 @@ const Hero = () => {
     },
   };
 
-  const letterVariants = {
-    hidden: { opacity: 0, y: 50, rotateX: -90 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      rotateX: 0,
-      transition: { duration: 0.5, ease: 'easeOut' },
-    },
-  };
-
   const name = "Eesh Sagar Singh";
 
   return (
@@ -49,80 +40,46 @@ const Hero = () => {
         animate="visible"
       >
         <motion.div variants={itemVariants} className="mb-6">
-          <span className="inline-block px-4 py-2 text-sm font-medium text-blue-400 bg-white/5 backdrop-blur-md rounded-full border border-white/10 shadow-lg shadow-blue-500/10">
+          <span className="inline-block px-4 py-2 text-sm font-medium text-emerald-400 bg-emerald-500/10 backdrop-blur-md rounded-full border border-emerald-500/20">
             Welcome to my portfolio
           </span>
         </motion.div>
 
         <motion.h1
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-8"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6"
+          variants={itemVariants}
         >
-          <motion.span 
-            className="block bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-3"
-            variants={itemVariants}
-          >
+          <span className="block text-[var(--text-secondary)] text-xl sm:text-2xl md:text-3xl font-medium mb-4">
             Hi, I'm
-          </motion.span>
-          <span className="block pb-2 bg-slate-900/10 backdrop-blur-[1px] px-6 py-3 rounded-[2rem] inline-block" style={{ perspective: '1200px' }}>
-            {name.split('').map((char, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, rotateY: 90, rotateX: -45, z: -200 }}
-                animate={{ opacity: 1, rotateY: 0, rotateX: 0, z: 0 }}
-                transition={{
-                  delay: 0.8 + index * 0.1,
-                  duration: 0.6,
-                  ease: [0.43, 0.13, 0.23, 0.96]
-                }}
-                className="bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
-                style={{
-                  display: 'inline-block',
-                  transformStyle: 'preserve-3d',
-                  transformOrigin: 'center center',
-                  backfaceVisibility: 'hidden',
-                  WebkitBackfaceVisibility: 'hidden',
-                  overflow: 'visible',
-                  lineHeight: '1.2'
-                }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ))}
           </span>
+          <span className="text-gradient">{name}</span>
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="text-base sm:text-lg md:text-xl text-slate-400 max-w-2xl mx-auto mb-8 px-2"
+          className="text-base sm:text-lg md:text-xl text-[var(--text-secondary)] max-w-2xl mx-auto mb-8 px-2"
         >
-          An{' '}
-          <span className="text-blue-400 font-medium">AI/ML Developer & Full Stack Engineer</span>{' '}
+          An <span className="text-emerald-400 font-medium">AI/ML Developer & Full Stack Engineer</span>{' '}
           passionate about building neural networks, deep learning models, and modern web applications.
         </motion.p>
 
-        {/* CTA Buttons */}
+        {/* CTA Buttons with Glass Effect */}
         <motion.div
           variants={itemVariants}
           className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mb-10 sm:mb-12 px-4"
         >
-          <motion.a
+          <GlassButton
             href="#projects"
-            className="px-6 sm:px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium rounded-xl transition-all text-center shadow-lg shadow-blue-500/25 backdrop-blur-sm"
-            whileHover={{ scale: 1.05, y: -3, rotateX: 5 }}
-            whileTap={{ scale: 0.95 }}
-            style={{ transformStyle: 'preserve-3d' }}
+            className="btn-primary text-center"
           >
             View My Work
-          </motion.a>
-          <motion.a
+          </GlassButton>
+          <GlassButton
             href="#contact"
-            className="px-6 sm:px-8 py-3 bg-white/5 backdrop-blur-md border border-white/10 hover:border-blue-500/50 text-slate-300 hover:text-white font-medium rounded-xl transition-all text-center shadow-lg"
-            whileHover={{ scale: 1.05, y: -3, rotateX: 5 }}
-            whileTap={{ scale: 0.95 }}
-            style={{ transformStyle: 'preserve-3d' }}
+            className="px-6 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium rounded-xl text-center"
           >
             Get In Touch
-          </motion.a>
+          </GlassButton>
         </motion.div>
 
         {/* Social Links */}
@@ -140,10 +97,9 @@ const Hero = () => {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-3 text-slate-400 hover:text-blue-400 bg-white/5 backdrop-blur-md border border-white/10 hover:border-blue-500/50 rounded-xl transition-all shadow-lg"
-              whileHover={{ scale: 1.15, y: -3, rotateY: 10 }}
+              className="p-3 text-[var(--text-muted)] hover:text-emerald-400 bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl transition-all"
+              whileHover={{ scale: 1.15, y: -3 }}
               whileTap={{ scale: 0.9 }}
-              style={{ transformStyle: 'preserve-3d' }}
               aria-label={social.label}
             >
               <social.icon size={20} />
@@ -161,7 +117,7 @@ const Hero = () => {
       >
         <motion.a
           href="#about"
-          className="flex flex-col items-center text-slate-500 hover:text-blue-400 transition-colors"
+          className="flex flex-col items-center text-[var(--text-muted)] hover:text-emerald-400 transition-colors"
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >

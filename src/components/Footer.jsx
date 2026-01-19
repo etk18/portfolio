@@ -18,16 +18,16 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative py-8 sm:py-12 border-t border-white/10">
+    <footer className="relative py-8 sm:py-12 border-t border-[var(--border-color)]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-center">
           {/* Logo */}
           <motion.a
             href="#home"
-            className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent mb-4 sm:mb-6"
+            className="text-xl sm:text-2xl font-bold text-gradient mb-4 sm:mb-6"
             whileHover={{ scale: 1.05 }}
           >
-            Portfolio
+            ESS
           </motion.a>
 
           {/* Navigation Links */}
@@ -36,7 +36,7 @@ const Footer = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-slate-400 hover:text-blue-400 transition-colors text-xs sm:text-sm"
+                className="text-[var(--text-muted)] hover:text-emerald-400 transition-colors text-xs sm:text-sm"
                 whileHover={{ y: -2 }}
               >
                 {link.name}
@@ -45,10 +45,10 @@ const Footer = () => {
           </nav>
 
           {/* Divider */}
-          <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-white/20 to-transparent mb-6 sm:mb-8" />
+          <div className="w-full max-w-xs h-px bg-gradient-to-r from-transparent via-[var(--border-color)] to-transparent mb-6 sm:mb-8" />
 
           {/* Copyright */}
-          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-slate-500 text-xs sm:text-sm text-center">
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-[var(--text-muted)] text-xs sm:text-sm text-center">
             <span>© {currentYear} Eesh Sagar Singh.</span>
             <span className="hidden sm:inline">•</span>
             <span className="flex items-center gap-1">
@@ -61,7 +61,7 @@ const Footer = () => {
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 p-2.5 sm:p-3 bg-white/10 backdrop-blur-md border border-white/20 hover:bg-blue-500/50 hover:border-blue-500/50 text-white rounded-full shadow-lg transition-all z-50"
+        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 p-2.5 sm:p-3 glass-card hover:bg-emerald-500/20 hover:border-emerald-500/50 text-[var(--text-primary)] transition-all z-50"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.1, y: -3 }}

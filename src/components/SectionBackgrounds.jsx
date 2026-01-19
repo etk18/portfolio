@@ -18,7 +18,7 @@ const useIsMobile = () => {
 // Wrapper - z-index -1 puts it BEHIND content (which has z-10)
 const SectionCanvas = ({ children, reducedOnMobile = true }) => {
   const isMobile = useIsMobile();
-  
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }}>
       <Canvas
@@ -72,7 +72,7 @@ const BrainNeuron = ({ position, color, size = 0.15, delay = 0 }) => {
 const NeuralConnection = ({ start, end, color, pulseSpeed = 1 }) => {
   const lineRef = useRef();
   const particleRef = useRef();
-  
+
   const curve = useMemo(() => {
     const mid = [
       (start[0] + end[0]) / 2 + (Math.random() - 0.5) * 2,
@@ -114,7 +114,7 @@ const NeuralConnection = ({ start, end, color, pulseSpeed = 1 }) => {
 
 const CodeRain = ({ count = 50 }) => {
   const particlesRef = useRef();
-  
+
   const { positions, speeds, chars } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const speeds = [];
@@ -175,7 +175,7 @@ const FloatingBracket = ({ position, rotation = 0, scale = 1 }) => {
 
 export const HeroBackground = () => {
   const isMobile = useIsMobile();
-  
+
   const neurons = useMemo(() => {
     const n = [];
     const count = isMobile ? 12 : 25;
@@ -377,8 +377,8 @@ const SkillGrid = () => {
     for (let i = 0; i < positions.count; i++) {
       const x = positions.getX(i);
       const y = positions.getY(i);
-      const z = Math.sin(x * 0.5 + state.clock.elapsedTime) * 0.3 + 
-                Math.sin(y * 0.5 + state.clock.elapsedTime * 0.7) * 0.3;
+      const z = Math.sin(x * 0.5 + state.clock.elapsedTime) * 0.3 +
+        Math.sin(y * 0.5 + state.clock.elapsedTime * 0.7) * 0.3;
       positions.setZ(i, z);
     }
     positions.needsUpdate = true;
@@ -430,7 +430,7 @@ const DataStream = ({ startPos, endPos }) => {
 
 export const SkillsBackground = () => {
   const isMobile = useIsMobile();
-  
+
   return (
     <SectionCanvas>
       <SkillGrid />
@@ -479,11 +479,11 @@ const Monitor3D = ({ position, rotation = [0, 0, 0], scale = 1 }) => {
       {[-0.5, -0.2, 0.1, 0.4].map((y, i) => (
         <mesh key={i} position={[-0.4 + (i % 2) * 0.2, y, 0.1]}>
           <planeGeometry args={[1.2 - (i % 3) * 0.2, 0.1]} />
-          <meshStandardMaterial 
-            color={['#60a5fa', '#a78bfa', '#22d3ee', '#34d399'][i]} 
+          <meshStandardMaterial
+            color={['#60a5fa', '#a78bfa', '#22d3ee', '#34d399'][i]}
             emissive={['#60a5fa', '#a78bfa', '#22d3ee', '#34d399'][i]}
             emissiveIntensity={1}
-            transparent opacity={0.8} 
+            transparent opacity={0.8}
           />
         </mesh>
       ))}
@@ -547,7 +547,7 @@ const FloatingCodeBlock = ({ position, delay = 0 }) => {
       {[0.3, 0.1, -0.1, -0.3].map((y, i) => (
         <mesh key={i} position={[-0.2, y, 0.03]}>
           <planeGeometry args={[0.8 - i * 0.1, 0.08]} />
-          <meshStandardMaterial 
+          <meshStandardMaterial
             color={['#60a5fa', '#22d3ee', '#a78bfa', '#34d399'][i]}
             emissive={['#60a5fa', '#22d3ee', '#a78bfa', '#34d399'][i]}
             emissiveIntensity={1}
@@ -561,7 +561,7 @@ const FloatingCodeBlock = ({ position, delay = 0 }) => {
 
 export const ProjectsBackground = () => {
   const isMobile = useIsMobile();
-  
+
   return (
     <SectionCanvas>
       {!isMobile && (
@@ -701,7 +701,7 @@ const GradCap3D = ({ position }) => {
 
 export const ExperienceBackground = () => {
   const isMobile = useIsMobile();
-  
+
   return (
     <SectionCanvas>
       <TimelinePath3D />
@@ -842,7 +842,7 @@ const SignalWave = ({ position, delay = 0 }) => {
 
 export const ContactBackground = () => {
   const isMobile = useIsMobile();
-  
+
   return (
     <SectionCanvas>
       <Globe3D />

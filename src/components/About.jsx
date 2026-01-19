@@ -1,8 +1,8 @@
-import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Calendar, MapPin, Briefcase, Download, User } from 'lucide-react';
 import { AboutBackground } from './SectionBackgrounds';
+import { GlassCard, GlassButton } from '../hooks/useGlassTilt';
 
 const About = () => {
   const ref = useRef(null);
@@ -26,13 +26,13 @@ const About = () => {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-blue-400 font-medium text-sm tracking-wider uppercase">
+          <span className="text-emerald-400 font-medium text-sm tracking-wider uppercase">
             About Me
           </span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-2 text-white">
+          <h2 className="section-heading text-[var(--text-primary)] mt-2">
             Get To Know Me
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-4 rounded-full" />
+          <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto mt-4 rounded-full" />
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -45,35 +45,35 @@ const About = () => {
           >
             <div className="relative aspect-square max-w-xs sm:max-w-sm md:max-w-md mx-auto">
               {/* Decorative Elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl transform rotate-3" />
-              <div className="absolute inset-0 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-amber-500/20 rounded-2xl transform rotate-3" />
+              <div className="absolute inset-0 glass-card overflow-hidden">
                 {/* Profile Image */}
-                <img 
-                  src="/profile.jpg" 
+                <img
+                  src="/profile.jpg"
                   alt="Eesh Sagar Singh"
                   className="w-full h-full object-cover"
                 />
               </div>
 
-              {/* Floating Cards - Hidden on mobile */}
+              {/* Floating Cards */}
               <motion.div
-                className="hidden sm:block absolute -top-4 -right-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 sm:p-4 shadow-xl z-10"
+                className="hidden sm:block absolute -top-4 -right-4 glass-card p-3 sm:p-4 z-10"
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <Briefcase className="text-blue-400 mb-1" size={20} />
-                <p className="text-white font-semibold text-sm">AI/ML</p>
-                <p className="text-slate-400 text-xs">Developer</p>
+                <Briefcase className="text-emerald-400 mb-1" size={20} />
+                <p className="text-[var(--text-primary)] font-semibold text-sm">AI/ML</p>
+                <p className="text-[var(--text-muted)] text-xs">Developer</p>
               </motion.div>
 
               <motion.div
-                className="hidden sm:block absolute -bottom-4 -left-4 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-3 sm:p-4 shadow-xl z-10"
+                className="hidden sm:block absolute -bottom-4 -left-4 glass-card p-3 sm:p-4 z-10"
                 animate={{ y: [0, 10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
-                <Calendar className="text-purple-400 mb-1" size={20} />
-                <p className="text-white font-semibold text-sm">B.Tech IT</p>
-                <p className="text-slate-400 text-xs">2023-2027</p>
+                <Calendar className="text-amber-400 mb-1" size={20} />
+                <p className="text-[var(--text-primary)] font-semibold text-sm">B.Tech IT</p>
+                <p className="text-[var(--text-muted)] text-xs">2023-2027</p>
               </motion.div>
             </div>
           </motion.div>
@@ -84,13 +84,13 @@ const About = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h3 className="text-xl sm:text-2xl font-bold text-white mb-4">
+            <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-4">
               AI/ML Developer Based in Delhi, India
             </h3>
-            <p className="text-slate-300 mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base font-medium">
+            <p className="text-[var(--text-secondary)] mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
               I'm an AI/ML Developer with hands-on experience building neural networks and deep learning models for predictive analytics. Proficient in Python, TensorFlow, scikit-learn, and NLP techniques with a strong foundation in full-stack development using React.js, Node.js, and modern web technologies.
             </p>
-            <p className="text-slate-300 mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base font-medium">
+            <p className="text-[var(--text-secondary)] mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
               Currently pursuing B.Tech in Information Technology at Maharaja Agrasen Institute of Technology with a GPA of 8.5/10. I'm passionate about leveraging machine learning to solve complex real-world problems and drive data-driven decision making.
             </p>
 
@@ -104,32 +104,28 @@ const About = () => {
               ].map((item, index) => (
                 <motion.div
                   key={item.label}
-                  className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white/5 backdrop-blur-md rounded-xl border border-white/10 shadow-lg"
+                  className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 glass-card"
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.6 + index * 0.1 }}
-                  whileHover={{ scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
-                  style={{ transformStyle: 'preserve-3d' }}
+                  whileHover={{ scale: 1.02 }}
                 >
-                  <item.icon className="text-blue-400 shrink-0" size={18} />
+                  <item.icon className="text-emerald-400 shrink-0" size={18} />
                   <div className="min-w-0">
-                    <p className="text-slate-500 text-xs">{item.label}</p>
-                    <p className="text-white text-xs sm:text-sm font-medium truncate">{item.value}</p>
+                    <p className="text-[var(--text-muted)] text-xs">{item.label}</p>
+                    <p className="text-[var(--text-primary)] text-xs sm:text-sm font-medium truncate">{item.value}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
 
-            <motion.a
+            <GlassButton
               href="/resume.pdf"
-              download="Eesh_Sagar_Singh_Resume.pdf"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-medium rounded-xl transition-all shadow-lg shadow-blue-500/25"
-              whileHover={{ scale: 1.05, y: -3 }}
-              whileTap={{ scale: 0.95 }}
+              className="inline-flex items-center gap-2 btn-primary"
             >
               <Download size={18} />
               Download Resume
-            </motion.a>
+            </GlassButton>
           </motion.div>
         </div>
 
@@ -141,22 +137,21 @@ const About = () => {
           transition={{ delay: 0.8 }}
         >
           {stats.map((stat, index) => (
-            <motion.div
+            <GlassCard
               key={stat.label}
-              className="text-center p-4 sm:p-6 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 shadow-lg"
-              whileHover={{ y: -8, scale: 1.02, borderColor: 'rgba(59, 130, 246, 0.5)' }}
-              style={{ transformStyle: 'preserve-3d' }}
+              className="text-center p-4 sm:p-6"
+              maxTilt={6}
             >
               <motion.span
-                className="text-2xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"
+                className="text-2xl sm:text-4xl md:text-5xl font-bold text-gradient"
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 1 + index * 0.1 }}
               >
                 {stat.value}
               </motion.span>
-              <p className="text-slate-400 mt-1 sm:mt-2 text-xs sm:text-sm">{stat.label}</p>
-            </motion.div>
+              <p className="text-[var(--text-muted)] mt-1 sm:mt-2 text-xs sm:text-sm">{stat.label}</p>
+            </GlassCard>
           ))}
         </motion.div>
       </div>
