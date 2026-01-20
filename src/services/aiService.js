@@ -1,8 +1,8 @@
-// AI Service for OpenAI API Integration
+// AI Service for Groq API Integration
 import { getRelevantContext, portfolioData } from '../data/portfolioKnowledge';
 
-const OPENAI_API_KEY = import.meta.env.VITE_OPENAI_API_KEY;
-const API_URL = 'https://api.openai.com/v1/chat/completions';
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
+const API_URL = 'https://api.groq.com/openai/v1/chat/completions';
 
 const SYSTEM_PROMPT = `You are a friendly, conversational AI assistant representing Eesh Sagar Singh's portfolio. Think of yourself as Eesh's helpful digital representative who can chat naturally about his background, projects, and skills.
 
@@ -38,8 +38,8 @@ IMPORTANT:
 let conversationHistory = [];
 
 export async function sendMessage(userMessage) {
-    if (!OPENAI_API_KEY) {
-        throw new Error('OpenAI API key not configured. Please add VITE_OPENAI_API_KEY to your .env file.');
+    if (!GROQ_API_KEY) {
+        throw new Error('Groq API key not configured. Please add VITE_GROQ_API_KEY to your .env file.');
     }
 
     // Get full portfolio context
@@ -75,10 +75,10 @@ export async function sendMessage(userMessage) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${OPENAI_API_KEY}`,
+                'Authorization': `Bearer ${GROQ_API_KEY}`,
             },
             body: JSON.stringify({
-                model: 'gpt-3.5-turbo',
+                model: 'llama-3.3-70b-versatile',
                 messages: messages,
                 temperature: 0.8,
                 max_tokens: 500,
@@ -89,7 +89,7 @@ export async function sendMessage(userMessage) {
 
         if (!response.ok) {
             const errorData = await response.json();
-            console.error('OpenAI API Error:', errorData);
+            console.error('Groq API Error:', errorData);
 
             if (response.status === 429 || errorData.error?.type === 'insufficient_quota') {
                 throw new Error('API rate limit reached. Please try again in a moment.');
@@ -116,7 +116,7 @@ export async function sendMessage(userMessage) {
 
         return assistantMessage;
     } catch (error) {
-        console.error('Error calling OpenAI API:', error);
+        console.error('Error calling Groq API:', error);
         throw error;
     }
 }
