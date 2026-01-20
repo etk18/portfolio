@@ -9,6 +9,7 @@ const navLinks = [
   { name: 'Skills', href: '#skills' },
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
+  { name: 'AI Assistant', href: '#ai-assistant', special: true },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -53,12 +54,16 @@ const Navbar = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] rounded-xl hover:bg-[var(--bg-tertiary)] transition-all"
+                className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${link.special
+                  ? 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 hover:bg-emerald-500/20'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]'
+                  }`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -2 }}
               >
+                {link.special && <span className="mr-1">✨</span>}
                 {link.name}
               </motion.a>
             ))}
@@ -123,12 +128,16 @@ const Navbar = () => {
                 <motion.a
                   key={link.name}
                   href={link.href}
-                  className="block px-4 py-3 text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] rounded-xl transition-all"
+                  className={`block px-4 py-3 rounded-xl transition-all ${link.special
+                      ? 'text-emerald-400 bg-emerald-500/10 border border-emerald-500/30'
+                      : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]'
+                    }`}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.05 }}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
+                  {link.special && <span className="mr-1">✨</span>}
                   {link.name}
                 </motion.a>
               ))}

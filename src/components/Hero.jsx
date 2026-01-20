@@ -75,6 +75,12 @@ const Hero = () => {
             View My Work
           </GlassButton>
           <GlassButton
+            href="#ai-assistant"
+            className="px-6 py-3 bg-gradient-to-r from-emerald-500/20 to-amber-500/20 border border-emerald-500/40 text-emerald-400 hover:text-emerald-300 font-medium rounded-xl text-center"
+          >
+            ✨ Ask AI Assistant
+          </GlassButton>
+          <GlassButton
             href="#contact"
             className="px-6 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] font-medium rounded-xl text-center"
           >
