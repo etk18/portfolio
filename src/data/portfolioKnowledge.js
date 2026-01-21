@@ -4,6 +4,7 @@
 export const portfolioData = {
     personal: {
         name: "Eesh Sagar Singh",
+        dateOfBirth: "October 2, 2005",
         phone: "+91-9939411596",
         email: "eeshsagar@gmail.com",
         linkedin: "https://linkedin.com/in/etk18",
@@ -164,6 +165,7 @@ export function getRelevantContext() {
 === EESH SAGAR SINGH - PORTFOLIO INFORMATION ===
 
 CONTACT & AVAILABILITY:
+- Date of Birth: ${p.personal.dateOfBirth}
 - Phone: ${p.personal.phone}
 - Email: ${p.personal.email}
 - LinkedIn: ${p.personal.linkedin}
