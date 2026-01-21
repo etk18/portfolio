@@ -6,6 +6,7 @@ import Background3D from './components/Background3D';
 import HomePage from './pages/HomePage';
 import AIAssistantPage from './pages/AIAssistantPage';
 import AdminPage from './pages/AdminPage';
+import ATSCheckerPage from './pages/ATSCheckerPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/ai-assistant" element={<AIAssistantPage />} />
               <Route path="/admin" element={<AdminPage />} />
+              <Route path="/ats-checker" element={<ATSCheckerPage />} />
             </Routes>
           </main>
           <Footer />

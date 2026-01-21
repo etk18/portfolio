@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon, Shield } from 'lucide-react';
+import { Menu, X, Sun, Moon, Shield, FileText } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ const navLinks = [
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
   { name: 'AI Assistant', href: '/ai-assistant', special: true, isRoute: true },
+  { name: 'ATS Checker', href: '/ats-checker', isRoute: true, isATS: true },
   { name: 'Admin', href: '/admin', isRoute: true, isAdmin: true },
   { name: 'Contact', href: '#contact' },
 ];
@@ -111,12 +112,16 @@ const Navbar = () => {
                       ? location.pathname === link.href
                         ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40'
                         : 'text-amber-400 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20'
-                      : location.pathname === link.href
-                        ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
-                        : 'text-rose-400 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20'
+                      : link.isATS
+                        ? location.pathname === link.href
+                          ? 'text-cyan-400 bg-cyan-500/20 border border-cyan-500/40'
+                          : 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/30 hover:bg-cyan-500/20'
+                        : location.pathname === link.href
+                          ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
+                          : 'text-rose-400 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20'
                       }`}
                   >
-                    {link.isAdmin ? <Shield size={14} /> : <span>✨</span>}
+                    {link.isAdmin ? <Shield size={14} /> : link.isATS ? <FileText size={14} /> : <span>✨</span>}
                     {link.name}
                   </Link>
                 </motion.div>
@@ -206,13 +211,17 @@ const Navbar = () => {
                           ? location.pathname === link.href
                             ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40'
                             : 'text-amber-400 bg-amber-500/10 border border-amber-500/30'
-                          : location.pathname === link.href
-                            ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
-                            : 'text-rose-400 bg-rose-500/10 border border-rose-500/30'
+                          : link.isATS
+                            ? location.pathname === link.href
+                              ? 'text-cyan-400 bg-cyan-500/20 border border-cyan-500/40'
+                              : 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/30'
+                            : location.pathname === link.href
+                              ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
+                              : 'text-rose-400 bg-rose-500/10 border border-rose-500/30'
                         }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      {link.isAdmin ? <Shield size={16} /> : <span>✨</span>}
+                      {link.isAdmin ? <Shield size={16} /> : link.isATS ? <FileText size={16} /> : <span>✨</span>}
                       {link.name}
                     </Link>
                   </motion.div>
