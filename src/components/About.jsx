@@ -1,158 +1,173 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Calendar, MapPin, Briefcase, Download, User } from 'lucide-react';
-import { AboutBackground } from './SectionBackgrounds';
+import { Calendar, MapPin, Briefcase, Download, GraduationCap, Award, Target, Rocket } from 'lucide-react';
 import { GlassCard, GlassButton } from '../hooks/useGlassTilt';
 
 const About = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
-  const stats = [
-    { label: 'GPA Score', value: '8.5' },
-    { label: 'Projects Completed', value: '5+' },
-    { label: 'Technologies', value: '20+' },
-    { label: 'Certifications', value: '5+' },
-  ];
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
 
   return (
-    <section id="about" className="py-20 md:py-32 relative">
-      <AboutBackground />
+    <section id="about" className="py-24 md:py-32 relative overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-rose-500/5 rounded-full blur-[100px]" />
+        <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-amber-500/5 rounded-full blur-[100px]" />
+      </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" ref={ref}>
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
         >
-          <span className="text-emerald-400 font-medium text-sm tracking-wider uppercase">
-            About Me
-          </span>
-          <h2 className="section-heading text-[var(--text-primary)] mt-2">
-            Get To Know Me
+          <div className="flex items-center gap-4 mb-4">
+            <span className="text-rose-400 font-medium text-sm tracking-wider uppercase">About Me</span>
+            <div className="h-px flex-1 max-w-[100px] bg-gradient-to-r from-rose-500 to-transparent" />
+          </div>
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold text-[var(--text-primary)]">
+            Get To <span className="text-gradient">Know Me</span>
           </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto mt-4 rounded-full" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Image/Visual Side */}
-          <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: -50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            <div className="relative aspect-square max-w-xs sm:max-w-sm md:max-w-md mx-auto">
-              {/* Decorative Elements */}
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-amber-500/20 rounded-2xl transform rotate-3" />
-              <div className="absolute inset-0 glass-card overflow-hidden">
-                {/* Profile Image */}
+        {/* Bento Grid */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {/* Main Bio Card - Large */}
+          <motion.div variants={itemVariants} className="lg:col-span-2 lg:row-span-2">
+            <GlassCard className="h-full p-6 sm:p-8">
+              <div className="flex flex-col h-full">
+                <div className="flex items-start gap-4 mb-6">
+                  <div className="p-3 bg-rose-500/10 rounded-xl">
+                    <Briefcase className="text-rose-400" size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-[var(--text-primary)]">AI/ML Developer</h3>
+                    <p className="text-[var(--text-muted)] text-sm">Based in Delhi, India</p>
+                  </div>
+                </div>
+
+                <p className="text-[var(--text-secondary)] leading-relaxed mb-6">
+                  I'm an AI/ML Developer with hands-on experience building neural networks and deep learning models for predictive analytics. Proficient in Python, TensorFlow, scikit-learn, and NLP techniques with a strong foundation in full-stack development.
+                </p>
+
+                <p className="text-[var(--text-secondary)] leading-relaxed mb-8">
+                  I'm passionate about leveraging machine learning to solve complex real-world problems and drive data-driven decision making. Currently exploring Generative AI, LangChain, and Computer Vision.
+                </p>
+
+                <div className="mt-auto">
+                  <GlassButton
+                    href="/resume.pdf"
+                    className="inline-flex items-center gap-2 btn-primary"
+                  >
+                    <Download size={18} />
+                    Download Resume
+                  </GlassButton>
+                </div>
+              </div>
+            </GlassCard>
+          </motion.div>
+
+          {/* Profile Image Card */}
+          <motion.div variants={itemVariants}>
+            <GlassCard className="h-full p-0 overflow-hidden aspect-square">
+              <div className="relative h-full w-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-rose-500/20 to-amber-500/20" />
                 <img
                   src="/profile.jpg"
                   alt="Eesh Sagar Singh"
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                  <p className="text-white font-semibold">Eesh Sagar Singh</p>
+                  <p className="text-white/70 text-sm">Developer</p>
+                </div>
               </div>
-
-              {/* Floating Cards */}
-              <motion.div
-                className="hidden sm:block absolute -top-4 -right-4 glass-card p-3 sm:p-4 z-10"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-              >
-                <Briefcase className="text-emerald-400 mb-1" size={20} />
-                <p className="text-[var(--text-primary)] font-semibold text-sm">AI/ML</p>
-                <p className="text-[var(--text-muted)] text-xs">Developer</p>
-              </motion.div>
-
-              <motion.div
-                className="hidden sm:block absolute -bottom-4 -left-4 glass-card p-3 sm:p-4 z-10"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-              >
-                <Calendar className="text-amber-400 mb-1" size={20} />
-                <p className="text-[var(--text-primary)] font-semibold text-sm">B.Tech IT</p>
-                <p className="text-[var(--text-muted)] text-xs">2023-2027</p>
-              </motion.div>
-            </div>
+            </GlassCard>
           </motion.div>
 
-          {/* Content Side */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <h3 className="text-xl sm:text-2xl font-bold text-[var(--text-primary)] mb-4">
-              AI/ML Developer Based in Delhi, India
-            </h3>
-            <p className="text-[var(--text-secondary)] mb-4 sm:mb-6 leading-relaxed text-sm sm:text-base">
-              I'm an AI/ML Developer with hands-on experience building neural networks and deep learning models for predictive analytics. Proficient in Python, TensorFlow, scikit-learn, and NLP techniques with a strong foundation in full-stack development using React.js, Node.js, and modern web technologies.
-            </p>
-            <p className="text-[var(--text-secondary)] mb-6 sm:mb-8 leading-relaxed text-sm sm:text-base">
-              Currently pursuing B.Tech in Information Technology at Maharaja Agrasen Institute of Technology with a GPA of 8.5/10. I'm passionate about leveraging machine learning to solve complex real-world problems and drive data-driven decision making.
-            </p>
+          {/* Education Card */}
+          <motion.div variants={itemVariants}>
+            <GlassCard className="h-full p-6">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="p-2 bg-amber-500/10 rounded-lg">
+                  <GraduationCap className="text-amber-400" size={20} />
+                </div>
+                <span className="text-[var(--text-muted)] text-sm font-medium">Education</span>
+              </div>
+              <h4 className="text-lg font-bold text-[var(--text-primary)] mb-1">B.Tech in IT</h4>
+              <p className="text-[var(--text-muted)] text-sm mb-3">MAIT, Delhi</p>
+              <div className="flex items-center justify-between">
+                <span className="text-rose-400 text-sm">2023 - 2027</span>
+                <span className="text-2xl font-bold text-gradient">8.5</span>
+              </div>
+            </GlassCard>
+          </motion.div>
 
-            {/* Info Cards */}
-            <div className="grid grid-cols-2 gap-2 sm:gap-4 mb-6 sm:mb-8">
+          {/* Stats Cards Grid */}
+          <motion.div variants={itemVariants} className="lg:col-span-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 h-full">
               {[
-                { icon: User, label: 'Name', value: 'Eesh Sagar Singh' },
-                { icon: MapPin, label: 'Location', value: 'Delhi, India' },
-                { icon: Calendar, label: 'Education', value: 'B.Tech IT' },
-                { icon: Briefcase, label: 'Status', value: 'Open to Work' },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.label}
-                  className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 glass-card"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.6 + index * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                >
-                  <item.icon className="text-emerald-400 shrink-0" size={18} />
-                  <div className="min-w-0">
-                    <p className="text-[var(--text-muted)] text-xs">{item.label}</p>
-                    <p className="text-[var(--text-primary)] text-xs sm:text-sm font-medium truncate">{item.value}</p>
-                  </div>
-                </motion.div>
+                { label: 'GPA Score', value: '8.5', icon: Award, color: 'rose' },
+                { label: 'Projects', value: '5+', icon: Target, color: 'amber' },
+                { label: 'Technologies', value: '20+', icon: Rocket, color: 'rose' },
+                { label: 'Certifications', value: '5+', icon: Award, color: 'amber' },
+              ].map((stat, index) => (
+                <GlassCard key={stat.label} className="p-4 text-center">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={isInView ? { scale: 1 } : {}}
+                    transition={{ delay: 0.5 + index * 0.1, type: "spring" }}
+                  >
+                    <stat.icon className={`mx-auto mb-2 text-${stat.color}-400`} size={20} />
+                    <span className="text-2xl sm:text-3xl font-bold text-gradient block">{stat.value}</span>
+                    <span className="text-[var(--text-muted)] text-xs">{stat.label}</span>
+                  </motion.div>
+                </GlassCard>
               ))}
             </div>
-
-            <GlassButton
-              href="/resume.pdf"
-              className="inline-flex items-center gap-2 btn-primary"
-            >
-              <Download size={18} />
-              Download Resume
-            </GlassButton>
           </motion.div>
-        </div>
 
-        {/* Stats */}
-        <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-12 sm:mt-20"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 0.8 }}
-        >
-          {stats.map((stat, index) => (
-            <GlassCard
-              key={stat.label}
-              className="text-center p-4 sm:p-6"
-              maxTilt={6}
-            >
-              <motion.span
-                className="text-2xl sm:text-4xl md:text-5xl font-bold text-gradient"
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                transition={{ delay: 1 + index * 0.1 }}
-              >
-                {stat.value}
-              </motion.span>
-              <p className="text-[var(--text-muted)] mt-1 sm:mt-2 text-xs sm:text-sm">{stat.label}</p>
-            </GlassCard>
-          ))}
+          {/* Quick Info Cards */}
+          <motion.div variants={itemVariants} className="lg:col-span-3">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              {[
+                { icon: MapPin, label: 'Location', value: 'Delhi, India', color: 'text-rose-400' },
+                { icon: Briefcase, label: 'Status', value: 'Open to Work', color: 'text-green-400' },
+                { icon: Calendar, label: 'Experience', value: 'Fresher', color: 'text-amber-400' },
+                { icon: Target, label: 'Focus', value: 'AI/ML', color: 'text-rose-400' },
+              ].map((item) => (
+                <GlassCard key={item.label} className="p-4">
+                  <div className="flex items-center gap-3">
+                    <item.icon className={item.color} size={18} />
+                    <div>
+                      <p className="text-[var(--text-muted)] text-xs">{item.label}</p>
+                      <p className="text-[var(--text-primary)] font-medium text-sm">{item.value}</p>
+                    </div>
+                  </div>
+                </GlassCard>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>

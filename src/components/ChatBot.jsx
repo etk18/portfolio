@@ -87,7 +87,7 @@ const ChatBot = () => {
                 className={`fixed bottom-6 right-6 z-50 p-4 rounded-full shadow-2xl ${isOpen ? 'scale-0' : 'scale-100'
                     }`}
                 style={{
-                    background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)',
+                    background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)',
                 }}
                 whileHover={{ scale: 1.1, boxShadow: '0 0 30px rgba(16, 185, 129, 0.5)' }}
                 whileTap={{ scale: 0.95 }}
@@ -134,22 +134,22 @@ const ChatBot = () => {
                                     <div
                                         className="w-10 h-10 rounded-full flex items-center justify-center"
                                         style={{
-                                            background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)',
+                                            background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)',
                                         }}
                                     >
                                         <Bot className="text-white" size={20} />
                                     </div>
-                                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-500 rounded-full border-2 border-[var(--bg-secondary)]" />
+                                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-rose-500 rounded-full border-2 border-[var(--bg-secondary)]" />
                                 </div>
                                 <div>
                                     <h3 className="font-semibold text-[var(--text-primary)] text-sm">Portfolio Assistant</h3>
-                                    <p className="text-xs text-emerald-400">Powered by AI</p>
+                                    <p className="text-xs text-rose-400">Powered by AI</p>
                                 </div>
                             </div>
                             <div className="flex items-center gap-2">
                                 <motion.button
                                     onClick={handleReset}
-                                    className="p-2 text-[var(--text-muted)] hover:text-emerald-400 transition-colors rounded-lg hover:bg-[var(--bg-tertiary)]"
+                                    className="p-2 text-[var(--text-muted)] hover:text-rose-400 transition-colors rounded-lg hover:bg-[var(--bg-tertiary)]"
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.9 }}
                                     title="Reset conversation"
@@ -185,7 +185,7 @@ const ChatBot = () => {
                                             }`}
                                         style={
                                             message.role === 'assistant'
-                                                ? { background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)' }
+                                                ? { background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)' }
                                                 : {}
                                         }
                                     >
@@ -199,7 +199,7 @@ const ChatBot = () => {
                                     {/* Message Bubble */}
                                     <div
                                         className={`max-w-[80%] px-4 py-3 rounded-2xl ${message.role === 'user'
-                                            ? 'bg-emerald-500/20 text-[var(--text-primary)] rounded-tr-sm'
+                                            ? 'bg-rose-500/20 text-[var(--text-primary)] rounded-tr-sm'
                                             : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-tl-sm'
                                             }`}
                                     >
@@ -217,13 +217,13 @@ const ChatBot = () => {
                                 >
                                     <div
                                         className="w-8 h-8 rounded-full flex items-center justify-center"
-                                        style={{ background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)' }}
+                                        style={{ background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)' }}
                                     >
                                         <Bot size={16} className="text-white" />
                                     </div>
                                     <div className="max-w-[80%] px-4 py-3 rounded-2xl bg-[var(--bg-tertiary)] rounded-tl-sm">
                                         <div className="flex items-center gap-2">
-                                            <Loader2 size={16} className="animate-spin text-emerald-400" />
+                                            <Loader2 size={16} className="animate-spin text-rose-400" />
                                             <span className="text-sm text-[var(--text-muted)]">Thinking...</span>
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@ const ChatBot = () => {
                                         <motion.button
                                             key={index}
                                             onClick={() => handleSuggestedQuestion(question)}
-                                            className="px-3 py-1.5 text-xs bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-full hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors border border-[var(--border-color)]"
+                                            className="px-3 py-1.5 text-xs bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-full hover:bg-rose-500/20 hover:text-rose-400 transition-colors border border-[var(--border-color)]"
                                             whileHover={{ scale: 1.05 }}
                                             whileTap={{ scale: 0.95 }}
                                         >
@@ -270,7 +270,7 @@ const ChatBot = () => {
                                     onChange={(e) => setInput(e.target.value)}
                                     onKeyDown={handleKeyPress}
                                     placeholder="Ask about skills, projects..."
-                                    className="flex-1 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-emerald-500/50 transition-colors"
+                                    className="flex-1 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-rose-500/50 transition-colors"
                                     disabled={isLoading}
                                 />
                                 <motion.button
@@ -279,7 +279,7 @@ const ChatBot = () => {
                                     className="p-3 rounded-xl text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                     style={{
                                         background: input.trim() && !isLoading
-                                            ? 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)'
+                                            ? 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)'
                                             : 'var(--bg-tertiary)',
                                     }}
                                     whileHover={input.trim() && !isLoading ? { scale: 1.05 } : {}}

@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 /* ============================================
-   DESIGN SYSTEM - Emerald & Gold Theme
+   DESIGN SYSTEM - Rose & Coral Theme
    ============================================ */
 
 :root {
-  /* Primary - Emerald */
-  --color-primary-50: #ecfdf5;
-  --color-primary-100: #d1fae5;
-  --color-primary-200: #a7f3d0;
-  --color-primary-300: #6ee7b7;
-  --color-primary-400: #34d399;
-  --color-primary-500: #10b981;
-  --color-primary-600: #059669;
-  --color-primary-700: #047857;
-  --color-primary-800: #065f46;
-  --color-primary-900: #064e3b;
-  --color-primary-950: #022c22;
+  /* Primary - Rose/Coral */
+  --color-primary-50: #fff1f2;
+  --color-primary-100: #ffe4e6;
+  --color-primary-200: #fecdd3;
+  --color-primary-300: #fda4af;
+  --color-primary-400: #fb7185;
+  --color-primary-500: #f43f5e;
+  --color-primary-600: #e11d48;
+  --color-primary-700: #be123c;
+  --color-primary-800: #9f1239;
+  --color-primary-900: #881337;
+  --color-primary-950: #4c0519;
 
-  /* Accent - Gold */
+  /* Accent - Warm Amber */
   --color-accent-400: #fbbf24;
   --color-accent-500: #f59e0b;
   --color-accent-600: #d97706;
@@ -89,7 +89,7 @@ body {
 
 /* Selection */
 ::selection {
-  background-color: rgba(16, 185, 129, 0.3);
+  background-color: rgba(244, 63, 94, 0.3);
   color: white;
 }
 
@@ -145,25 +145,25 @@ html.light::-webkit-scrollbar-thumb:hover {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #f59e0b 100%);
+  background: linear-gradient(135deg, #f43f5e 0%, #fb7185 50%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.75rem;
   font-weight: 500;
   transition: all 0.2s ease;
-  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.25);
+  box-shadow: 0 4px 14px 0 rgba(244, 63, 94, 0.25);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.35);
+  box-shadow: 0 6px 20px 0 rgba(244, 63, 94, 0.35);
 }
 
 .section-heading {
@@ -245,7 +245,7 @@ html.light::-webkit-scrollbar-thumb:hover {
 
 /* Focus visible for keyboard navigation */
 :focus-visible {
-  outline: 2px solid #10b981;
+  outline: 2px solid #f43f5e;
   outline-offset: 2px;
 }
 

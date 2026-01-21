@@ -15,22 +15,27 @@ const useIsMobile = () => {
   return isMobile;
 };
 
-// Wrapper - z-index -1 puts it BEHIND content (which has z-10)
-const SectionCanvas = ({ children, reducedOnMobile = true }) => {
+// Wrapper - optimized with performance settings
+const SectionCanvas = ({ children }) => {
   const isMobile = useIsMobile();
+
+  // Skip 3D backgrounds on mobile for performance
+  if (isMobile) {
+    return null;
+  }
 
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden" style={{ zIndex: -1 }}>
       <Canvas
-        camera={{ position: [0, 0, isMobile ? 20 : 18], fov: 50 }}
-        gl={{ alpha: true, antialias: true }}
+        camera={{ position: [0, 0, 18], fov: 50 }}
+        gl={{ alpha: true, antialias: false, powerPreference: 'high-performance' }}
         style={{ background: 'transparent' }}
-        dpr={isMobile ? 1 : [1, 2]}
+        dpr={1}
+        frameloop="always"
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={0.8} />
-          <pointLight position={[10, 10, 10]} intensity={1.5} color="#60a5fa" />
-          <pointLight position={[-10, -10, 5]} intensity={0.8} color="#a855f7" />
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={0.8} color="#60a5fa" />
           {children}
         </Suspense>
       </Canvas>
@@ -38,45 +43,36 @@ const SectionCanvas = ({ children, reducedOnMobile = true }) => {
   );
 };
 
-// ==================== HERO - AI Brain Neural Network ====================
+// ==================== HERO - AI Brain Neural Network (Optimized) ====================
 const BrainNeuron = ({ position, color, size = 0.15, delay = 0 }) => {
   const meshRef = useRef();
-  const glowRef = useRef();
+  const frameCount = useRef(0);
 
   useFrame((state) => {
+    frameCount.current++;
+    if (frameCount.current % 3 !== 0) return; // Throttle to every 3rd frame
+
     const t = state.clock.elapsedTime + delay;
-    meshRef.current.position.y = position[1] + Math.sin(t * 0.6) * 0.3;
-    meshRef.current.position.x = position[0] + Math.cos(t * 0.4) * 0.15;
-    const pulse = 1 + Math.sin(t * 2) * 0.3;
+    meshRef.current.position.y = position[1] + Math.sin(t * 0.4) * 0.2;
+    const pulse = 1 + Math.sin(t * 1.5) * 0.2;
     meshRef.current.scale.setScalar(pulse);
-    if (glowRef.current) {
-      glowRef.current.scale.setScalar(pulse * 1.8);
-      glowRef.current.material.opacity = 0.15 + Math.sin(t * 2) * 0.1;
-    }
   });
 
   return (
-    <group position={position}>
-      <mesh ref={meshRef}>
-        <sphereGeometry args={[size, 16, 16]} />
-        <meshStandardMaterial color={color} emissive={color} emissiveIntensity={2} />
-      </mesh>
-      <mesh ref={glowRef}>
-        <sphereGeometry args={[size * 2, 16, 16]} />
-        <meshStandardMaterial color={color} transparent opacity={0.2} />
-      </mesh>
-    </group>
+    <mesh ref={meshRef} position={position}>
+      <sphereGeometry args={[size, 8, 8]} />
+      <meshBasicMaterial color={color} transparent opacity={0.8} />
+    </mesh>
   );
 };
 
-const NeuralConnection = ({ start, end, color, pulseSpeed = 1 }) => {
+const NeuralConnection = ({ start, end, color }) => {
   const lineRef = useRef();
-  const particleRef = useRef();
 
   const curve = useMemo(() => {
     const mid = [
-      (start[0] + end[0]) / 2 + (Math.random() - 0.5) * 2,
-      (start[1] + end[1]) / 2 + (Math.random() - 0.5) * 2,
+      (start[0] + end[0]) / 2,
+      (start[1] + end[1]) / 2,
       (start[2] + end[2]) / 2
     ];
     return new THREE.QuadraticBezierCurve3(
@@ -86,49 +82,35 @@ const NeuralConnection = ({ start, end, color, pulseSpeed = 1 }) => {
     );
   }, [start, end]);
 
-  const tubeGeo = useMemo(() => new THREE.TubeGeometry(curve, 20, 0.02, 8, false), [curve]);
-
-  useFrame((state) => {
-    const t = (state.clock.elapsedTime * pulseSpeed) % 1;
-    if (particleRef.current) {
-      const point = curve.getPoint(t);
-      particleRef.current.position.copy(point);
-    }
-    if (lineRef.current) {
-      lineRef.current.material.opacity = 0.2 + Math.sin(state.clock.elapsedTime * 2) * 0.1;
-    }
-  });
+  const tubeGeo = useMemo(() => new THREE.TubeGeometry(curve, 12, 0.015, 4, false), [curve]);
 
   return (
-    <group>
-      <mesh ref={lineRef} geometry={tubeGeo}>
-        <meshStandardMaterial color={color} transparent opacity={0.3} emissive={color} emissiveIntensity={0.5} />
-      </mesh>
-      <mesh ref={particleRef}>
-        <sphereGeometry args={[0.08, 8, 8]} />
-        <meshStandardMaterial color="#fff" emissive="#fff" emissiveIntensity={2} />
-      </mesh>
-    </group>
+    <mesh ref={lineRef} geometry={tubeGeo}>
+      <meshBasicMaterial color={color} transparent opacity={0.25} />
+    </mesh>
   );
 };
 
-const CodeRain = ({ count = 50 }) => {
+const CodeRain = ({ count = 30 }) => {
   const particlesRef = useRef();
+  const frameCount = useRef(0);
 
-  const { positions, speeds, chars } = useMemo(() => {
+  const { positions, speeds } = useMemo(() => {
     const positions = new Float32Array(count * 3);
     const speeds = [];
-    const chars = [];
     for (let i = 0; i < count; i++) {
       positions[i * 3] = (Math.random() - 0.5) * 25;
       positions[i * 3 + 1] = Math.random() * 15 - 5;
       positions[i * 3 + 2] = (Math.random() - 0.5) * 10 - 5;
-      speeds.push(Math.random() * 0.03 + 0.02);
+      speeds.push(Math.random() * 0.02 + 0.01);
     }
-    return { positions, speeds, chars };
+    return { positions, speeds };
   }, [count]);
 
   useFrame(() => {
+    frameCount.current++;
+    if (frameCount.current % 2 !== 0) return; // Throttle
+
     const pos = particlesRef.current.geometry.attributes.position.array;
     for (let i = 0; i < count; i++) {
       pos[i * 3 + 1] -= speeds[i];
@@ -142,65 +124,37 @@ const CodeRain = ({ count = 50 }) => {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" count={count} array={positions} itemSize={3} />
       </bufferGeometry>
-      <pointsMaterial size={0.15} color="#22d3ee" transparent opacity={0.8} sizeAttenuation />
+      <pointsMaterial size={0.1} color="#22d3ee" transparent opacity={0.6} sizeAttenuation />
     </points>
   );
 };
 
-const FloatingBracket = ({ position, rotation = 0, scale = 1 }) => {
-  const groupRef = useRef();
-
-  useFrame((state) => {
-    groupRef.current.rotation.y = rotation + Math.sin(state.clock.elapsedTime * 0.3) * 0.2;
-    groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.5 + position[0]) * 0.4;
-  });
-
-  return (
-    <group ref={groupRef} position={position} scale={scale}>
-      <mesh>
-        <torusGeometry args={[0.8, 0.08, 16, 32, Math.PI]} />
-        <meshStandardMaterial color="#60a5fa" emissive="#60a5fa" emissiveIntensity={1} transparent opacity={0.6} />
-      </mesh>
-      <mesh position={[0, 0.5, 0]}>
-        <boxGeometry args={[0.15, 0.5, 0.15]} />
-        <meshStandardMaterial color="#60a5fa" emissive="#60a5fa" emissiveIntensity={1} transparent opacity={0.6} />
-      </mesh>
-      <mesh position={[0, -0.5, 0]}>
-        <boxGeometry args={[0.15, 0.5, 0.15]} />
-        <meshStandardMaterial color="#60a5fa" emissive="#60a5fa" emissiveIntensity={1} transparent opacity={0.6} />
-      </mesh>
-    </group>
-  );
-};
-
 export const HeroBackground = () => {
-  const isMobile = useIsMobile();
-
   const neurons = useMemo(() => {
     const n = [];
-    const count = isMobile ? 12 : 25;
+    const count = 15; // Reduced from 25
     for (let i = 0; i < count; i++) {
       n.push({
-        pos: [(Math.random() - 0.5) * 20, (Math.random() - 0.5) * 14, (Math.random() - 0.5) * 6 - 8],
+        pos: [(Math.random() - 0.5) * 18, (Math.random() - 0.5) * 12, (Math.random() - 0.5) * 4 - 10],
         color: ['#60a5fa', '#a78bfa', '#22d3ee'][Math.floor(Math.random() * 3)],
         delay: Math.random() * 5
       });
     }
     return n;
-  }, [isMobile]);
+  }, []);
 
   const connections = useMemo(() => {
     const c = [];
-    const count = isMobile ? 6 : 15;
+    const count = 8; // Reduced from 15
     for (let i = 0; i < count; i++) {
       const n1 = neurons[Math.floor(Math.random() * neurons.length)];
       const n2 = neurons[Math.floor(Math.random() * neurons.length)];
       if (n1 !== n2) {
-        c.push({ start: n1.pos, end: n2.pos, color: '#60a5fa', speed: Math.random() * 0.5 + 0.5 });
+        c.push({ start: n1.pos, end: n2.pos, color: '#60a5fa' });
       }
     }
     return c;
-  }, [neurons, isMobile]);
+  }, [neurons]);
 
   return (
     <SectionCanvas>
@@ -208,15 +162,9 @@ export const HeroBackground = () => {
         <BrainNeuron key={i} position={n.pos} color={n.color} delay={n.delay} />
       ))}
       {connections.map((c, i) => (
-        <NeuralConnection key={i} start={c.start} end={c.end} color={c.color} pulseSpeed={c.speed} />
+        <NeuralConnection key={i} start={c.start} end={c.end} color={c.color} />
       ))}
-      <CodeRain count={isMobile ? 30 : 60} />
-      {!isMobile && (
-        <>
-          <FloatingBracket position={[-8, 3, -6]} rotation={0.5} scale={1.2} />
-          <FloatingBracket position={[8, -2, -7]} rotation={-0.3} scale={1} />
-        </>
-      )}
+      <CodeRain count={25} />
     </SectionCanvas>
   );
 };
@@ -437,7 +385,7 @@ export const SkillsBackground = () => {
       <TechPlanet orbitRadius={5} orbitSpeed={0.3} size={0.6} color="#60a5fa" tilt={0.2} />
       <TechPlanet orbitRadius={7} orbitSpeed={0.2} size={0.5} color="#a78bfa" tilt={-0.3} />
       <TechPlanet orbitRadius={4} orbitSpeed={0.4} size={0.4} color="#22d3ee" tilt={0.1} />
-      <TechPlanet orbitRadius={8} orbitSpeed={0.15} size={0.7} color="#34d399" tilt={-0.15} />
+      <TechPlanet orbitRadius={8} orbitSpeed={0.15} size={0.7} color="#fb7185" tilt={-0.15} />
       <TechPlanet orbitRadius={3} orbitSpeed={0.5} size={0.35} color="#f472b6" tilt={0.25} />
       {!isMobile && (
         <>
@@ -480,8 +428,8 @@ const Monitor3D = ({ position, rotation = [0, 0, 0], scale = 1 }) => {
         <mesh key={i} position={[-0.4 + (i % 2) * 0.2, y, 0.1]}>
           <planeGeometry args={[1.2 - (i % 3) * 0.2, 0.1]} />
           <meshStandardMaterial
-            color={['#60a5fa', '#a78bfa', '#22d3ee', '#34d399'][i]}
-            emissive={['#60a5fa', '#a78bfa', '#22d3ee', '#34d399'][i]}
+            color={['#60a5fa', '#a78bfa', '#22d3ee', '#fb7185'][i]}
+            emissive={['#60a5fa', '#a78bfa', '#22d3ee', '#fb7185'][i]}
             emissiveIntensity={1}
             transparent opacity={0.8}
           />
@@ -548,8 +496,8 @@ const FloatingCodeBlock = ({ position, delay = 0 }) => {
         <mesh key={i} position={[-0.2, y, 0.03]}>
           <planeGeometry args={[0.8 - i * 0.1, 0.08]} />
           <meshStandardMaterial
-            color={['#60a5fa', '#22d3ee', '#a78bfa', '#34d399'][i]}
-            emissive={['#60a5fa', '#22d3ee', '#a78bfa', '#34d399'][i]}
+            color={['#60a5fa', '#22d3ee', '#a78bfa', '#fb7185'][i]}
+            emissive={['#60a5fa', '#22d3ee', '#a78bfa', '#fb7185'][i]}
             emissiveIntensity={1}
             transparent opacity={0.9}
           />

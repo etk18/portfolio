@@ -10,6 +10,33 @@ export const portfolioData = {
         github: "https://github.com/etk18",
         location: "Delhi, India",
         status: "Open to Work",
+        languages: ["English", "Hindi"],
+        availability: "Immediately available - no current job or internship commitments",
+    },
+
+    personalityAndInterests: {
+        hobbies: [
+            "Gaming (plays regularly)",
+            "Cricket (extremely passionate about it)",
+            "Movies (quality cinema lover, appreciates good filmmaking)"
+        ],
+        workEthic: "Works hard and goes the extra mile when genuinely interested in the work. Passion-driven developer who puts in dedicated effort for projects that excite him.",
+        funFact: "Balances coding sessions with cricket matches and gaming breaks - believes in a well-rounded lifestyle!"
+    },
+
+    careerGoals: {
+        targetRole: "AI Developer",
+        vision: "Aspiring to become a comprehensive AI Developer with expertise across the entire AI/ML spectrum",
+        learningPath: [
+            "Machine Learning (ML)",
+            "Deep Learning (DL)",
+            "Natural Language Processing (NLP)",
+            "Generative AI",
+            "Retrieval-Augmented Generation (RAG)",
+            "Computer Vision (OpenCV)",
+            "Agentic AI"
+        ],
+        motivation: "Passionate about building intelligent systems that can solve real-world problems"
     },
 
     summary: `AI/ML Developer with hands-on experience building neural networks and deep learning models for predictive analytics. Proficient in Python, TensorFlow, scikit-learn, and NLP techniques with a strong foundation in full-stack development. Passionate about leveraging machine learning to solve complex real-world problems and drive data-driven decision making.`,
@@ -49,11 +76,13 @@ export const portfolioData = {
             technologies: ["Python", "TensorFlow", "Keras", "scikit-learn", "Pandas", "NumPy"],
             year: "2025",
             category: "AI/ML",
+            status: "Work in Progress - Actively developing and improving",
             details: [
                 "Engineered a deep learning model using neural networks and machine learning techniques to predict cryptocurrency price movements with time-series data analysis",
                 "Implemented LSTM and dense neural network architectures, achieving improved prediction accuracy through hyperparameter tuning and regularization techniques",
                 "Performed comprehensive data preprocessing including normalization, feature engineering, and train-test splitting using Pandas and NumPy for 50,000+ data points",
-                "Evaluated model performance using RMSE, MAE, and R² metrics with visualization of prediction results using Matplotlib"
+                "Evaluated model performance using RMSE, MAE, and R² metrics with visualization of prediction results using Matplotlib",
+                "Currently being developed further with regular updates and improvements - this is an ongoing passion project"
             ]
         },
         {
@@ -134,13 +163,26 @@ export function getRelevantContext() {
     return `
 === EESH SAGAR SINGH - PORTFOLIO INFORMATION ===
 
-CONTACT:
+CONTACT & AVAILABILITY:
 - Phone: ${p.personal.phone}
 - Email: ${p.personal.email}
 - LinkedIn: ${p.personal.linkedin}
 - GitHub: ${p.personal.github}
 - Location: ${p.personal.location}
-- Status: ${p.personal.status} (actively looking for opportunities)
+- Languages: ${p.personal.languages.join(", ")}
+- Status: ${p.personal.status}
+- Availability: ${p.personal.availability}
+
+PERSONALITY & INTERESTS (for casual conversation):
+- Hobbies: ${p.personalityAndInterests.hobbies.join("; ")}
+- Work Ethic: ${p.personalityAndInterests.workEthic}
+- Fun Fact: ${p.personalityAndInterests.funFact}
+
+CAREER GOALS:
+- Target Role: ${p.careerGoals.targetRole}
+- Vision: ${p.careerGoals.vision}
+- Currently Learning: ${p.careerGoals.learningPath.join(", ")}
+- Motivation: ${p.careerGoals.motivation}
 
 PROFESSIONAL SUMMARY:
 ${p.summary}
@@ -160,7 +202,7 @@ ${e.responsibilities.map(r => `  • ${r}`).join("\n")}`).join("\n")}
 PROJECTS:
 
 ${p.projects.map(proj => `
-📁 ${proj.title} (${proj.year}) [${proj.category}]
+📁 ${proj.title} (${proj.year}) [${proj.category}]${proj.status ? ` - ${proj.status}` : ''}
 Technologies: ${proj.technologies.join(", ")}
 ${proj.details.map(d => `  • ${d}`).join("\n")}`).join("\n")}
 

@@ -2,11 +2,11 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { useRef, useMemo } from 'react';
 import { Float } from '@react-three/drei';
 import { useTheme } from '../context/ThemeContext';
-import * as THREE from 'three';
 
-// Subtle floating particles
-const Particles = ({ count = 50, isDark }) => {
+// Subtle floating particles - optimized
+const Particles = ({ count = 30, isDark }) => {
   const meshRef = useRef();
+  const frameCount = useRef(0);
 
   const positions = useMemo(() => {
     const pos = new Float32Array(count * 3);
@@ -19,8 +19,12 @@ const Particles = ({ count = 50, isDark }) => {
   }, [count]);
 
   useFrame((state) => {
-    meshRef.current.rotation.y = state.clock.elapsedTime * 0.02;
-    meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.05;
+    // Throttle to every 2nd frame for performance
+    frameCount.current++;
+    if (frameCount.current % 2 !== 0) return;
+
+    meshRef.current.rotation.y = state.clock.elapsedTime * 0.015;
+    meshRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.008) * 0.03;
   });
 
   return (
@@ -35,32 +39,37 @@ const Particles = ({ count = 50, isDark }) => {
       </bufferGeometry>
       <pointsMaterial
         size={0.03}
-        color={isDark ? "#10b981" : "#059669"}
+        color={isDark ? "#f43f5e" : "#e11d48"}
         transparent
-        opacity={isDark ? 0.6 : 0.4}
+        opacity={isDark ? 0.5 : 0.3}
         sizeAttenuation
       />
     </points>
   );
 };
 
-// Subtle floating shape
+// Subtle floating shape - optimized
 const FloatingShape = ({ position, isDark }) => {
   const meshRef = useRef();
+  const frameCount = useRef(0);
 
   useFrame((state) => {
-    meshRef.current.rotation.x = state.clock.elapsedTime * 0.1;
-    meshRef.current.rotation.y = state.clock.elapsedTime * 0.15;
+    // Throttle to every 3rd frame
+    frameCount.current++;
+    if (frameCount.current % 3 !== 0) return;
+
+    meshRef.current.rotation.x = state.clock.elapsedTime * 0.05;
+    meshRef.current.rotation.y = state.clock.elapsedTime * 0.08;
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
+    <Float speed={1} rotationIntensity={0.3} floatIntensity={0.3}>
       <mesh ref={meshRef} position={position}>
-        <icosahedronGeometry args={[1, 1]} />
-        <meshStandardMaterial
-          color={isDark ? "#10b981" : "#059669"}
+        <icosahedronGeometry args={[1, 0]} />
+        <meshBasicMaterial
+          color={isDark ? "#f43f5e" : "#e11d48"}
           transparent
-          opacity={0.08}
+          opacity={0.06}
           wireframe
         />
       </mesh>
@@ -76,19 +85,20 @@ const Background3D = () => {
       <Canvas
         camera={{ position: [0, 0, 10], fov: 60 }}
         style={{ background: 'transparent' }}
-        dpr={[1, 1.5]}
+        dpr={1}
+        frameloop="always"
       >
-        <ambientLight intensity={0.3} />
-        <pointLight position={[10, 10, 10]} intensity={0.5} color="#10b981" />
+        <ambientLight intensity={0.2} />
+        <pointLight position={[10, 10, 10]} intensity={0.3} color="#f43f5e" />
 
-        <Particles count={40} isDark={isDark} />
+        <Particles count={25} isDark={isDark} />
 
         <FloatingShape position={[-5, 3, -8]} isDark={isDark} />
         <FloatingShape position={[5, -3, -10]} isDark={isDark} />
-        <FloatingShape position={[0, -5, -12]} isDark={isDark} />
       </Canvas>
     </div>
   );
 };
 
 export default Background3D;
+

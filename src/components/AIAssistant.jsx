@@ -152,7 +152,7 @@ const AIAssistant = () => {
         <section id="ai-assistant" className="py-20 md:py-32 relative overflow-hidden">
             {/* Animated Background */}
             <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl animate-pulse" />
+                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-500/10 rounded-full blur-3xl animate-pulse" />
                 <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }} />
             </div>
 
@@ -165,12 +165,12 @@ const AIAssistant = () => {
                     transition={{ duration: 0.6 }}
                 >
                     <motion.div
-                        className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full border border-emerald-500/30 bg-emerald-500/10"
+                        className="inline-flex items-center gap-2 px-4 py-2 mb-4 rounded-full border border-rose-500/30 bg-rose-500/10"
                         animate={{ boxShadow: ['0 0 20px rgba(16, 185, 129, 0.2)', '0 0 40px rgba(16, 185, 129, 0.4)', '0 0 20px rgba(16, 185, 129, 0.2)'] }}
                         transition={{ duration: 2, repeat: Infinity }}
                     >
-                        <Sparkles className="text-emerald-400" size={16} />
-                        <span className="text-emerald-400 font-medium text-sm">AI-Powered</span>
+                        <Sparkles className="text-rose-400" size={16} />
+                        <span className="text-rose-400 font-medium text-sm">AI-Powered</span>
                         {isPremium && (
                             <span className="ml-2 px-2 py-0.5 bg-amber-500/20 text-amber-400 text-xs rounded-full flex items-center gap-1">
                                 <Crown size={12} /> Premium
@@ -180,7 +180,7 @@ const AIAssistant = () => {
                     <h2 className="section-heading text-[var(--text-primary)]">
                         Ask My AI Assistant
                     </h2>
-                    <div className="w-20 h-1 bg-gradient-to-r from-emerald-500 to-amber-500 mx-auto mt-4 rounded-full" />
+                    <div className="w-20 h-1 bg-gradient-to-r from-rose-500 to-amber-500 mx-auto mt-4 rounded-full" />
                     <p className="text-[var(--text-muted)] mt-4 max-w-2xl mx-auto">
                         {isPremium
                             ? "You have unlimited access! Ask me anything about Eesh's skills, projects, or experience."
@@ -209,7 +209,7 @@ const AIAssistant = () => {
                             transition={{ delay: 0.3 + i * 0.1 }}
                             whileHover={{ scale: 1.02, y: -2 }}
                         >
-                            <feature.icon className={`mx-auto mb-2 ${i === 2 && !isPremium ? 'text-amber-400' : 'text-emerald-400'}`} size={24} />
+                            <feature.icon className={`mx-auto mb-2 ${i === 2 && !isPremium ? 'text-amber-400' : 'text-rose-400'}`} size={24} />
                             <h4 className="text-[var(--text-primary)] font-medium text-sm">{feature.title}</h4>
                             <p className="text-[var(--text-muted)] text-xs mt-1">{feature.desc}</p>
                         </motion.div>
@@ -240,7 +240,7 @@ const AIAssistant = () => {
                                     initial={{ scale: 0.9, y: 20 }}
                                     animate={{ scale: 1, y: 0 }}
                                 >
-                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-amber-500/20 to-emerald-500/20 flex items-center justify-center">
+                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-r from-amber-500/20 to-rose-500/20 flex items-center justify-center">
                                         <Lock className="text-amber-400" size={32} />
                                     </div>
                                     <h3 className="text-xl font-bold text-[var(--text-primary)] mb-2">
@@ -255,7 +255,7 @@ const AIAssistant = () => {
                                                 setShowPaywall(false);
                                                 setShowPasskeyModal(true);
                                             }}
-                                            className="px-6 py-3 bg-gradient-to-r from-emerald-500 to-amber-500 text-white font-medium rounded-xl flex items-center justify-center gap-2"
+                                            className="px-6 py-3 bg-gradient-to-r from-rose-500 to-amber-500 text-white font-medium rounded-xl flex items-center justify-center gap-2"
                                             whileHover={{ scale: 1.02 }}
                                             whileTap={{ scale: 0.98 }}
                                         >
@@ -297,21 +297,21 @@ const AIAssistant = () => {
                             <motion.div
                                 className="relative w-12 h-12 rounded-full flex items-center justify-center"
                                 style={{
-                                    background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)',
+                                    background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)',
                                 }}
                                 animate={{ rotate: [0, 5, -5, 0] }}
                                 transition={{ duration: 4, repeat: Infinity }}
                             >
                                 <Bot className="text-white" size={24} />
-                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-emerald-400 rounded-full border-2 border-[var(--bg-secondary)]" />
+                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-rose-400 rounded-full border-2 border-[var(--bg-secondary)]" />
                             </motion.div>
                             <div>
                                 <h3 className="font-bold text-[var(--text-primary)] flex items-center gap-2">
                                     Portfolio AI Assistant
                                     {isPremium && <Crown size={14} className="text-amber-400" />}
                                 </h3>
-                                <p className="text-xs text-emerald-400 flex items-center gap-1">
-                                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
+                                <p className="text-xs text-rose-400 flex items-center gap-1">
+                                    <span className="w-2 h-2 bg-rose-400 rounded-full animate-pulse" />
                                     {isPremium ? 'Premium Mode • Unlimited' : `Free Mode • ${remainingFreeQuestions} left`}
                                 </p>
                             </div>
@@ -329,7 +329,7 @@ const AIAssistant = () => {
                             )}
                             <motion.button
                                 onClick={handleReset}
-                                className="p-2 text-[var(--text-muted)] hover:text-emerald-400 transition-colors rounded-lg hover:bg-[var(--bg-tertiary)]"
+                                className="p-2 text-[var(--text-muted)] hover:text-rose-400 transition-colors rounded-lg hover:bg-[var(--bg-tertiary)]"
                                 whileHover={{ scale: 1.1, rotate: 180 }}
                                 whileTap={{ scale: 0.9 }}
                                 title="Reset conversation"
@@ -351,7 +351,7 @@ const AIAssistant = () => {
                             >
                                 <div
                                     className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${message.role === 'user' ? 'bg-[var(--bg-tertiary)]' : ''}`}
-                                    style={message.role === 'assistant' ? { background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)' } : {}}
+                                    style={message.role === 'assistant' ? { background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)' } : {}}
                                 >
                                     {message.role === 'user' ? (
                                         <User size={18} className="text-[var(--text-muted)]" />
@@ -361,7 +361,7 @@ const AIAssistant = () => {
                                 </div>
                                 <div
                                     className={`max-w-[75%] px-4 py-3 rounded-2xl ${message.role === 'user'
-                                        ? 'bg-gradient-to-r from-emerald-500/20 to-amber-500/20 text-[var(--text-primary)] rounded-tr-sm'
+                                        ? 'bg-gradient-to-r from-rose-500/20 to-amber-500/20 text-[var(--text-primary)] rounded-tr-sm'
                                         : 'bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-tl-sm'
                                         }`}
                                 >
@@ -380,13 +380,13 @@ const AIAssistant = () => {
                                 >
                                     <div
                                         className="w-10 h-10 rounded-full flex items-center justify-center"
-                                        style={{ background: 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)' }}
+                                        style={{ background: 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)' }}
                                     >
                                         <Bot size={18} className="text-white" />
                                     </div>
                                     <div className="px-4 py-3 rounded-2xl bg-[var(--bg-tertiary)] rounded-tl-sm">
                                         <div className="flex items-center gap-2">
-                                            <Loader2 size={16} className="animate-spin text-emerald-400" />
+                                            <Loader2 size={16} className="animate-spin text-rose-400" />
                                             <span className="text-sm text-[var(--text-muted)]">Thinking...</span>
                                         </div>
                                     </div>
@@ -413,7 +413,7 @@ const AIAssistant = () => {
                                             key={index}
                                             onClick={() => handleSuggestedQuestion(question)}
                                             disabled={cooldown > 0 || isInputDisabled}
-                                            className="px-3 py-1.5 text-xs bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-full hover:bg-emerald-500/20 hover:text-emerald-400 transition-colors border border-[var(--border-color)] disabled:opacity-50 disabled:cursor-not-allowed"
+                                            className="px-3 py-1.5 text-xs bg-[var(--bg-tertiary)] text-[var(--text-secondary)] rounded-full hover:bg-rose-500/20 hover:text-rose-400 transition-colors border border-[var(--border-color)] disabled:opacity-50 disabled:cursor-not-allowed"
                                             whileHover={!isInputDisabled ? { scale: 1.05 } : {}}
                                             whileTap={!isInputDisabled ? { scale: 0.95 } : {}}
                                         >
@@ -441,7 +441,7 @@ const AIAssistant = () => {
                                             ? `Wait ${cooldown}s...`
                                             : "Ask me anything about Eesh..."
                                 }
-                                className="flex-1 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-emerald-500/50 transition-colors disabled:opacity-50"
+                                className="flex-1 px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-rose-500/50 transition-colors disabled:opacity-50"
                                 disabled={isInputDisabled}
                                 onClick={() => {
                                     if (!isPremium && questionCount >= FREE_QUESTION_LIMIT) {
@@ -455,7 +455,7 @@ const AIAssistant = () => {
                                 className="relative p-3 rounded-xl text-white disabled:opacity-50 disabled:cursor-not-allowed"
                                 style={{
                                     background: input.trim() && !isLoading && cooldown === 0
-                                        ? 'linear-gradient(135deg, #10b981 0%, #f59e0b 100%)'
+                                        ? 'linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%)'
                                         : 'var(--bg-tertiary)',
                                 }}
                                 whileHover={input.trim() && !isLoading && cooldown === 0 ? { scale: 1.05 } : {}}
@@ -474,7 +474,7 @@ const AIAssistant = () => {
 
                         <p className="text-xs text-[var(--text-muted)] mt-2 text-center">
                             {isPremium ? (
-                                <span className="text-emerald-400">👑 Premium Access • Unlimited questions</span>
+                                <span className="text-rose-400">👑 Premium Access • Unlimited questions</span>
                             ) : cooldown > 0 ? (
                                 <span className="text-amber-400">⏱️ Rate limited: {cooldown}s</span>
                             ) : (
@@ -486,7 +486,7 @@ const AIAssistant = () => {
                             <div className="flex gap-2 mt-3">
                                 <motion.button
                                     onClick={() => setShowPasskeyModal(true)}
-                                    className="flex-1 py-2 bg-gradient-to-r from-emerald-500 to-amber-500 text-white text-sm font-medium rounded-xl flex items-center justify-center gap-2"
+                                    className="flex-1 py-2 bg-gradient-to-r from-rose-500 to-amber-500 text-white text-sm font-medium rounded-xl flex items-center justify-center gap-2"
                                     whileHover={{ scale: 1.02 }}
                                     whileTap={{ scale: 0.98 }}
                                 >
@@ -516,9 +516,9 @@ const AIAssistant = () => {
                 >
                     <p className="text-[var(--text-muted)] text-sm">
                         {isPremium ? (
-                            <>Thanks for being a premium member! Check out my <a href="#projects" className="text-emerald-400 hover:underline">projects</a>.</>
+                            <>Thanks for being a premium member! Check out my <a href="#projects" className="text-rose-400 hover:underline">projects</a>.</>
                         ) : (
-                            <>Need unlimited access? <button onClick={() => setShowRequestModal(true)} className="text-emerald-400 hover:underline">Request a passkey</button> from Eesh!</>
+                            <>Need unlimited access? <button onClick={() => setShowRequestModal(true)} className="text-rose-400 hover:underline">Request a passkey</button> from Eesh!</>
                         )}
                     </p>
                 </motion.div>
@@ -543,7 +543,7 @@ const AIAssistant = () => {
                         >
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
-                                    <Key className="text-emerald-400" size={20} />
+                                    <Key className="text-rose-400" size={20} />
                                     Enter Passkey
                                 </h3>
                                 <button onClick={() => setShowPasskeyModal(false)} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
@@ -562,7 +562,7 @@ const AIAssistant = () => {
                                 }}
                                 onKeyDown={(e) => e.key === 'Enter' && handlePasskeySubmit()}
                                 placeholder="Enter your passkey..."
-                                className="w-full px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-emerald-500/50 mb-2"
+                                className="w-full px-4 py-3 bg-[var(--bg-tertiary)] border border-[var(--border-color)] rounded-xl text-sm text-[var(--text-primary)] placeholder-[var(--text-muted)] focus:outline-none focus:border-rose-500/50 mb-2"
                                 autoFocus
                             />
                             {passkeyError && (
@@ -570,7 +570,7 @@ const AIAssistant = () => {
                             )}
                             <motion.button
                                 onClick={handlePasskeySubmit}
-                                className="w-full py-3 bg-gradient-to-r from-emerald-500 to-amber-500 text-white font-medium rounded-xl flex items-center justify-center gap-2"
+                                className="w-full py-3 bg-gradient-to-r from-rose-500 to-amber-500 text-white font-medium rounded-xl flex items-center justify-center gap-2"
                                 whileHover={{ scale: 1.02 }}
                                 whileTap={{ scale: 0.98 }}
                             >
@@ -578,7 +578,7 @@ const AIAssistant = () => {
                                 Unlock Premium Access
                             </motion.button>
                             <p className="text-xs text-center text-[var(--text-muted)] mt-3">
-                                Don't have a passkey? <button onClick={() => { setShowPasskeyModal(false); setShowRequestModal(true); }} className="text-emerald-400 hover:underline">Request one</button>
+                                Don't have a passkey? <button onClick={() => { setShowPasskeyModal(false); setShowRequestModal(true); }} className="text-rose-400 hover:underline">Request one</button>
                             </p>
                         </motion.div>
                     </motion.div>
@@ -604,7 +604,7 @@ const AIAssistant = () => {
                         >
                             <div className="flex justify-between items-center mb-4">
                                 <h3 className="text-lg font-bold text-[var(--text-primary)] flex items-center gap-2">
-                                    <Mail className="text-emerald-400" size={20} />
+                                    <Mail className="text-rose-400" size={20} />
                                     Request Premium Access
                                 </h3>
                                 <button onClick={() => setShowRequestModal(false)} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
@@ -613,8 +613,8 @@ const AIAssistant = () => {
                             </div>
                             {requestSent ? (
                                 <div className="text-center py-4">
-                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-emerald-500/20 flex items-center justify-center">
-                                        <Check className="text-emerald-400" size={32} />
+                                    <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-rose-500/20 flex items-center justify-center">
+                                        <Check className="text-rose-400" size={32} />
                                     </div>
                                     <h4 className="font-medium text-[var(--text-primary)] mb-2">Email Client Opened!</h4>
                                     <p className="text-sm text-[var(--text-muted)]">
@@ -628,7 +628,7 @@ const AIAssistant = () => {
                                     </p>
                                     <motion.button
                                         onClick={handleRequestAccess}
-                                        className="w-full py-3 bg-gradient-to-r from-emerald-500 to-amber-500 text-white font-medium rounded-xl flex items-center justify-center gap-2"
+                                        className="w-full py-3 bg-gradient-to-r from-rose-500 to-amber-500 text-white font-medium rounded-xl flex items-center justify-center gap-2"
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                     >
@@ -636,7 +636,7 @@ const AIAssistant = () => {
                                         Send Request via Email
                                     </motion.button>
                                     <p className="text-xs text-center text-[var(--text-muted)] mt-3">
-                                        Or email directly: <a href="mailto:eeshsagar@gmail.com" className="text-emerald-400">eeshsagar@gmail.com</a>
+                                        Or email directly: <a href="mailto:eeshsagar@gmail.com" className="text-rose-400">eeshsagar@gmail.com</a>
                                     </p>
                                 </>
                             )}

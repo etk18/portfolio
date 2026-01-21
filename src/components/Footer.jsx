@@ -36,7 +36,7 @@ const Footer = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="text-[var(--text-muted)] hover:text-emerald-400 transition-colors text-xs sm:text-sm"
+                className="text-[var(--text-muted)] hover:text-rose-400 transition-colors text-xs sm:text-sm"
                 whileHover={{ y: -2 }}
               >
                 {link.name}
@@ -61,7 +61,7 @@ const Footer = () => {
       {/* Scroll to Top Button */}
       <motion.button
         onClick={scrollToTop}
-        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 p-2.5 sm:p-3 glass-card hover:bg-emerald-500/20 hover:border-emerald-500/50 text-[var(--text-primary)] transition-all z-50"
+        className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 p-2.5 sm:p-3 glass-card hover:bg-rose-500/20 hover:border-rose-500/50 text-[var(--text-primary)] transition-all z-50"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         whileHover={{ scale: 1.1, y: -3 }}

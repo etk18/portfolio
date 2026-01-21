@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * Custom hook for 3D glass tilt effect on mouse hover
@@ -109,19 +110,35 @@ export const GlassCard = ({ children, className = '', maxTilt = 8, ...props }) =
 
 /**
  * GlassButton component with built-in 3D tilt effect
+ * Supports React Router Link via 'to' prop, or regular anchor via 'href' prop
  */
-export const GlassButton = ({ children, className = '', as = 'button', href, ...props }) => {
+export const GlassButton = ({ children, className = '', as = 'button', href, to, ...props }) => {
     const { ref, style, glareStyle, handlers } = useGlassTilt({ maxTilt: 12, scale: 1.05 });
 
-    const Component = href ? 'a' : as;
+    // Determine which component to render
+    let Component;
+    let linkProps = {};
+
+    if (to) {
+        // React Router Link
+        Component = Link;
+        linkProps = { to };
+    } else if (href) {
+        // Regular anchor
+        Component = 'a';
+        linkProps = { href };
+    } else {
+        // Button or custom element
+        Component = as;
+    }
 
     return (
         <Component
             ref={ref}
-            href={href}
-            className={`relative overflow-hidden inline-block ${className}`}
+            className={`relative overflow-hidden inline-flex items-center justify-center ${className}`}
             style={style}
             {...handlers}
+            {...linkProps}
             {...props}
         >
             {/* Glare overlay */}
@@ -135,3 +152,4 @@ export const GlassButton = ({ children, className = '', as = 'button', href, ...
 };
 
 export default useGlassTilt;
+
