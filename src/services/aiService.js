@@ -45,14 +45,51 @@ export async function sendMessage(userMessage) {
     // Get full portfolio context
     const portfolioContext = getRelevantContext();
 
+    // Fetch admin context (stored conversations)
+    let adminContext = '';
+    try {
+        // Try API first
+        const response = await fetch('/api/conversations');
+        if (response.ok) {
+            const data = await response.json();
+            if (data.conversations && data.conversations.length > 0) {
+                const recentConversations = data.conversations.slice(-30);
+                adminContext = recentConversations
+                    .map(msg => `${msg.role === 'user' ? 'Eesh' : 'AI'}: ${msg.content}`)
+                    .join('\n');
+            }
+        } else {
+            // Fallback: Direct Supabase query for dev mode
+            const { fetchAdminContext } = await import('./adminService.js');
+            adminContext = await fetchAdminContext() || '';
+        }
+    } catch (error) {
+        console.log('Admin context fetch failed, trying direct Supabase');
+        try {
+            const { fetchAdminContext } = await import('./adminService.js');
+            adminContext = await fetchAdminContext() || '';
+        } catch (e) {
+            console.log('Admin context not available');
+        }
+    }
+
     // First message includes full context
     const isFirstMessage = conversationHistory.length === 0;
+
+    // Build system content with admin context
+    let systemContent = SYSTEM_PROMPT;
+    if (isFirstMessage) {
+        systemContent += `\n\nPORTFOLIO CONTEXT:\n${portfolioContext}`;
+    }
+    if (adminContext) {
+        systemContent += `\n\nRECENT CONVERSATIONS WITH EESH (use this for additional context about what he's currently working on):\n${adminContext}`;
+    }
 
     // Build messages array
     const messages = [
         {
             role: 'system',
-            content: SYSTEM_PROMPT + (isFirstMessage ? `\n\nPORTFOLIO CONTEXT:\n${portfolioContext}` : '')
+            content: systemContent
         },
     ];
 

@@ -5,6 +5,7 @@ import Footer from './components/Footer';
 import Background3D from './components/Background3D';
 import HomePage from './pages/HomePage';
 import AIAssistantPage from './pages/AIAssistantPage';
+import AdminPage from './pages/AdminPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/ai-assistant" element={<AIAssistantPage />} />
+              <Route path="/admin" element={<AdminPage />} />
             </Routes>
           </main>
           <Footer />

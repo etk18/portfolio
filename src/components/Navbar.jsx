@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X, Sun, Moon, Shield } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ const navLinks = [
   { name: 'Projects', href: '#projects' },
   { name: 'Experience', href: '#experience' },
   { name: 'AI Assistant', href: '/ai-assistant', special: true, isRoute: true },
+  { name: 'Admin', href: '/admin', isRoute: true, isAdmin: true },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -106,12 +107,16 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    className={`px-4 py-2 text-sm font-medium rounded-xl transition-all ${location.pathname === link.href
-                      ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
-                      : 'text-rose-400 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20'
+                    className={`px-4 py-2 text-sm font-medium rounded-xl transition-all flex items-center gap-1 ${link.isAdmin
+                      ? location.pathname === link.href
+                        ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40'
+                        : 'text-amber-400 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20'
+                      : location.pathname === link.href
+                        ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
+                        : 'text-rose-400 bg-rose-500/10 border border-rose-500/30 hover:bg-rose-500/20'
                       }`}
                   >
-                    <span className="mr-1">✨</span>
+                    {link.isAdmin ? <Shield size={14} /> : <span>✨</span>}
                     {link.name}
                   </Link>
                 </motion.div>
@@ -197,13 +202,17 @@ const Navbar = () => {
                   >
                     <Link
                       to={link.href}
-                      className={`block px-4 py-3 rounded-xl transition-all ${location.pathname === link.href
-                        ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
-                        : 'text-rose-400 bg-rose-500/10 border border-rose-500/30'
+                      className={`flex items-center gap-2 px-4 py-3 rounded-xl transition-all ${link.isAdmin
+                          ? location.pathname === link.href
+                            ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40'
+                            : 'text-amber-400 bg-amber-500/10 border border-amber-500/30'
+                          : location.pathname === link.href
+                            ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
+                            : 'text-rose-400 bg-rose-500/10 border border-rose-500/30'
                         }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
-                      <span className="mr-1">✨</span>
+                      {link.isAdmin ? <Shield size={16} /> : <span>✨</span>}
                       {link.name}
                     </Link>
                   </motion.div>
