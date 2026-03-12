@@ -41,7 +41,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden pt-20 lg:pt-0"
     >
       {/* Background gradient orbs */}
       <div className="absolute inset-0 overflow-hidden">
@@ -60,7 +60,7 @@ const Hero = () => {
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center min-h-[80vh]">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh]">
 
           {/* Left Content */}
           <motion.div
@@ -82,7 +82,7 @@ const Hero = () => {
               <span className="block text-[var(--text-muted)] text-lg sm:text-xl font-medium mb-2">
                 Hello, I'm
               </span>
-              <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.1] tracking-tight overflow-visible">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1.1] tracking-tight overflow-visible">
                 <span className="text-gradient block pb-1">{name}</span>
                 <span className="text-[var(--text-primary)] block">{lastName}</span>
               </h1>

@@ -10,12 +10,12 @@ const skillCategories = [
     icon: Brain,
     color: 'rose',
     skills: [
-      { name: 'Python', level: 90 },
-      { name: 'TensorFlow/Keras', level: 85 },
-      { name: 'PyTorch', level: 75 },
-      { name: 'scikit-learn', level: 85 },
-      { name: 'Pandas/NumPy', level: 90 },
-      { name: 'NLP', level: 80 },
+      { name: 'Deep Learning', level: 90 },
+      { name: 'Transformers', level: 85 },
+      { name: 'PyTorch & TF', level: 85 },
+      { name: 'Generative AI', level: 80 },
+      { name: 'Python/Data', level: 90 },
+      { name: 'NLP & CV', level: 85 },
     ],
   },
   {
@@ -126,9 +126,9 @@ const Skills = () => {
   const [activeCategory, setActiveCategory] = useState('aiml');
 
   const technologies = [
-    'Python', 'TensorFlow', 'Keras', 'PyTorch', 'scikit-learn',
-    'React.js', 'Node.js', 'MongoDB', 'Deep Learning', 'NLP',
-    'Generative AI', 'LangChain', 'Computer Vision',
+    'Deep Learning', 'Transformers', 'Generative AI', 'LLMs', 'RAG',
+    'Python', 'PyTorch', 'React.js', 'Node.js', 'MongoDB',
+    'Agentic AI', 'LangChain', 'Computer Vision',
   ];
 
   return (
@@ -200,9 +200,9 @@ const Skills = () => {
           <div className="inline-flex items-center gap-3 px-6 py-3 glass-card">
             <Cpu className="text-rose-400" size={20} />
             <p className="text-[var(--text-muted)]">
-              Currently exploring <span className="text-rose-400">Generative AI</span>,
-              <span className="text-rose-400"> LangChain</span>, and
-              <span className="text-amber-400"> Computer Vision</span>
+              Currently exploring <span className="text-rose-400">Agentic Workflows</span>,
+              <span className="text-rose-400"> Multi-modal LLMs</span>, and
+              <span className="text-amber-400"> Advanced RAG systems</span>
             </p>
           </div>
         </motion.div>

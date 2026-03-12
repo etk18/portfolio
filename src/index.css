@@ -260,3 +260,42 @@ html.light::-webkit-scrollbar-thumb:hover {
     container-type: inline-size;
   }
 }
+
+/* ============================================
+   CASE STUDY UTILITIES
+   ============================================ */
+
+/* Shimmer animation for accent bars */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.case-study-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+}
+
+/* Hover glow for highlight items */
+.bento-highlight {
+  position: relative;
+}
+
+.bento-highlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  background: radial-gradient(
+    ellipse at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(244, 63, 94, 0.06) 0%,
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.bento-highlight:hover::before {
+  opacity: 1;
+}

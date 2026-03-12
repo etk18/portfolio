@@ -84,7 +84,7 @@ const Navbar = () => {
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
+        <div className="flex items-center justify-between h-14 sm:h-16 lg:h-20">
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link
@@ -96,7 +96,7 @@ const Navbar = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1 pr-1">
+          <div className="hidden lg:flex items-center gap-0.5 pr-1">
             {navLinks.map((link, index) => (
               link.isRoute ? (
                 <motion.div
@@ -108,7 +108,7 @@ const Navbar = () => {
                 >
                   <Link
                     to={link.href}
-                    className={`px-4 py-2 text-sm font-medium rounded-xl transition-all flex items-center gap-1 ${link.isAdmin
+                    className={`px-3 py-2 text-[13px] font-medium rounded-xl transition-all flex items-center gap-1 whitespace-nowrap ${link.isAdmin
                       ? location.pathname === link.href
                         ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40'
                         : 'text-amber-400 bg-amber-500/10 border border-amber-500/30 hover:bg-amber-500/20'
@@ -130,7 +130,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link)}
-                  className="px-4 py-2 text-sm font-medium rounded-xl transition-all text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)]"
+                  className="px-3 py-2 text-[13px] font-medium rounded-xl transition-all text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-tertiary)] whitespace-nowrap"
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
@@ -144,7 +144,7 @@ const Navbar = () => {
             {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
-              className="ml-2 p-2.5 rounded-xl bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
+              className="ml-1 p-2 rounded-xl bg-[var(--bg-tertiary)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-all"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Toggle theme"
@@ -155,7 +155,7 @@ const Navbar = () => {
             <motion.a
               href="/resume.pdf"
               download="Eesh_Sagar_Singh_Resume.pdf"
-              className="ml-3 btn-primary text-sm"
+              className="ml-2 btn-primary text-[13px]"
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -164,7 +164,7 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Controls */}
-          <div className="md:hidden flex items-center gap-2">
+          <div className="lg:hidden flex items-center gap-2">
             {/* Theme Toggle */}
             <motion.button
               onClick={toggleTheme}
@@ -194,7 +194,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-[var(--bg-card)] backdrop-blur-xl border-b border-[var(--border-color)]"
+            className="lg:hidden bg-[var(--bg-card)] backdrop-blur-xl border-b border-[var(--border-color)]"
           >
             <div className="px-4 py-4 space-y-2">
               {navLinks.map((link, index) => (
@@ -208,16 +208,16 @@ const Navbar = () => {
                     <Link
                       to={link.href}
                       className={`flex items-center gap-2 px-4 py-3 rounded-xl transition-all ${link.isAdmin
+                        ? location.pathname === link.href
+                          ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40'
+                          : 'text-amber-400 bg-amber-500/10 border border-amber-500/30'
+                        : link.isATS
                           ? location.pathname === link.href
-                            ? 'text-amber-400 bg-amber-500/20 border border-amber-500/40'
-                            : 'text-amber-400 bg-amber-500/10 border border-amber-500/30'
-                          : link.isATS
-                            ? location.pathname === link.href
-                              ? 'text-cyan-400 bg-cyan-500/20 border border-cyan-500/40'
-                              : 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/30'
-                            : location.pathname === link.href
-                              ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
-                              : 'text-rose-400 bg-rose-500/10 border border-rose-500/30'
+                            ? 'text-cyan-400 bg-cyan-500/20 border border-cyan-500/40'
+                            : 'text-cyan-400 bg-cyan-500/10 border border-cyan-500/30'
+                          : location.pathname === link.href
+                            ? 'text-rose-400 bg-rose-500/20 border border-rose-500/40'
+                            : 'text-rose-400 bg-rose-500/10 border border-rose-500/30'
                         }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
